@@ -1,0 +1,2225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALVINTECH Segurança | CFTV, Controle de Acesso e Redes</title>
+<meta name="description" content="ALVINTECH Segurança - Controle de acesso facial, CFTV com IA, alarmes monitorados, redes, fibra óptica e segurança eletrônica em Londrina-PR.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%230ea5ff'/%3E%3Cstop offset='1' stop-color='%230b3a66'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M50 6 L90 20 L90 52 C90 76 72 90 50 96 C28 90 10 76 10 52 L10 20 Z' fill='url(%23g)'/%3E%3Cpath d='M50 28 L34 72 M50 28 L66 72 M42 58 L58 58' stroke='white' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3Ccircle cx='50' cy='28' r='4.5' fill='%2338bdf8'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --navy-950:#030b16;
+  --navy-900:#051526;
+  --navy-800:#081f38;
+  --navy-700:#0c2c4d;
+  --navy-600:#0f3a63;
+  --blue:#0ea5ff;
+  --blue-2:#38bdf8;
+  --blue-3:#7dd3fc;
+  --ice:#f3f8fc;
+  --ice-2:#e9f3fb;
+  --white:#ffffff;
+  --ink:#071a2e;
+  --slate:#54697d;
+  --slate-2:#7f93a5;
+  --line:#dfe9f2;
+  --ok:#22d47a;
+  --gold:#ffb94d;
+  --r-lg:22px;
+  --r-md:15px;
+  --r-sm:9px;
+  --shadow-soft:0 18px 45px rgba(4,26,50,.09);
+  --shadow-glow:0 0 0 1px rgba(14,165,255,.35), 0 20px 60px rgba(14,165,255,.18);
+  --ease:cubic-bezier(.22,.9,.32,1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Inter',Arial,sans-serif;
+  background:var(--ice);
+  color:var(--ink);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:'Space Grotesk',Arial,sans-serif;letter-spacing:-.01em;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;}
+ul{list-style:none;}
+button{font-family:inherit;}
+.container{width:92%;max-width:1200px;margin:auto;}
+.blue{
+  background:linear-gradient(90deg,var(--blue-2),var(--blue-3),var(--blue),var(--blue-2));
+  background-size:300% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:gradientShift 6s ease infinite;
+  display:inline-block;
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important;}
+}
+
+/* ============================================================
+   SCROLL PROGRESS BAR
+   ============================================================ */
+.progress-bar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--blue),var(--blue-3));z-index:1100;box-shadow:0 0 10px rgba(14,165,255,.6);transition:width .1s linear;}
+
+/* ============================================================
+   TECH BACKGROUND TEXTURE (dark sections)
+   ============================================================ */
+.section-dark, .hero, header, .alarm, footer, .monitor, .faq-sec{
+  background-color:var(--navy-900);
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(14,165,255,.14) 1px, transparent 0);
+  background-size:26px 26px;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+header{
+  height:74px;
+  color:white;
+  position:sticky;
+  top:0;
+  z-index:999;
+  border-bottom:1px solid rgba(14,165,255,.18);
+  background-color:rgba(3,11,22,.82);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  transition:background-color .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
+}
+header.scrolled{background-color:rgba(3,11,22,.96);box-shadow:0 10px 30px rgba(0,10,25,.35);border-bottom-color:rgba(14,165,255,.3);}
+.nav{height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
+.logo{display:flex;align-items:center;gap:11px;font-weight:700;font-size:17px;}
+.logo-mark,img.logo-mark,.logo-3d{
+  width:60px;height:60px;flex:none;object-fit:contain;
+  filter:
+    drop-shadow(0 1px 0 rgba(255,255,255,.35))
+    drop-shadow(0 4px 2px rgba(2,20,40,.35))
+    drop-shadow(0 10px 20px rgba(14,165,255,.55))
+    drop-shadow(0 16px 32px rgba(14,165,255,.25));
+  transform: perspective(420px) rotateY(-12deg) rotateX(8deg);
+  transition: transform .5s var(--ease), filter .5s var(--ease);
+  transform-style: preserve-3d;
+}
+.logo:hover .logo-mark,.logo:hover .logo-3d{
+  transform: perspective(420px) rotateY(12deg) rotateX(4deg) scale(1.12);
+  filter:
+    drop-shadow(0 1px 0 rgba(255,255,255,.5))
+    drop-shadow(0 6px 4px rgba(2,20,40,.4))
+    drop-shadow(0 14px 28px rgba(14,165,255,.75))
+    drop-shadow(0 22px 40px rgba(14,165,255,.35));
+}
+footer .logo-mark{width:40px;height:40px;transform:perspective(420px) rotateY(-8deg) rotateX(6deg);}
+.scanner-logo .logo-3d, .scanner-logo img{
+  width:112px;height:112px;
+  transform: perspective(600px) rotateY(0deg) rotateX(6deg);
+  filter:
+    drop-shadow(0 2px 0 rgba(255,255,255,.3))
+    drop-shadow(0 8px 6px rgba(2,20,40,.4))
+    drop-shadow(0 16px 28px rgba(14,165,255,.55));
+}
+
+.logo small{display:block;font-size:8.5px;letter-spacing:3.5px;color:var(--blue-3);font-weight:600;margin-top:1px;}
+
+.menu{display:flex;gap:24px;font-size:12.5px;font-weight:600;}
+.menu a{position:relative;padding:4px 0;color:#d7e6f2;transition:color .2s var(--ease);}
+.menu a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:2px;background:var(--blue);transition:width .25s var(--ease);}
+.menu a:hover{color:white;}
+.menu a:hover::after{width:100%;}
+
+.nav-right{display:flex;align-items:center;gap:14px;}
+.btn-top{
+  background:linear-gradient(135deg,var(--blue),#0670c9);
+  padding:11px 18px;border-radius:9px;font-size:12px;font-weight:700;color:white;
+  display:flex;align-items:center;gap:8px;
+  box-shadow:0 10px 24px rgba(14,165,255,.35);
+  transition:transform .2s var(--ease), box-shadow .2s var(--ease);
+}
+.btn-top:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(14,165,255,.45);}
+.online-dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px rgba(34,212,122,.25);animation:pulseDot 1.8s ease-in-out infinite;}
+
+.burger{display:none;width:40px;height:40px;border:1px solid rgba(255,255,255,.18);border-radius:9px;background:transparent;color:white;font-size:20px;cursor:pointer;align-items:center;justify-content:center;}
+.mobile-menu{display:none;flex-direction:column;background:var(--navy-950);border-top:1px solid rgba(255,255,255,.08);position:fixed;top:74px;left:0;right:0;z-index:998;padding:8px 0;max-height:0;overflow:hidden;transition:max-height .35s var(--ease);}
+.mobile-menu.open{max-height:460px;}
+.mobile-menu a{padding:15px 22px;font-size:13px;font-weight:600;color:#dceaf4;border-bottom:1px solid rgba(255,255,255,.06);display:block;}
+.mobile-menu a:active{background:rgba(255,255,255,.05);}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{position:relative;color:white;overflow:hidden;padding-top:6px;}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 82% 20%, rgba(14,165,255,.30), transparent 42%),
+    radial-gradient(circle at 15% 85%, rgba(14,165,255,.16), transparent 40%),
+    linear-gradient(120deg, var(--navy-950) 10%, var(--navy-900) 55%, var(--navy-800));
+  z-index:0;
+}
+.circuit-bg{position:absolute;inset:0;z-index:0;opacity:.55;pointer-events:none;}
+.circuit-bg .node{animation:pulseDot 3.4s ease-in-out infinite;}
+.hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:46px;align-items:center;padding:64px 0 58px;}
+
+.tag{
+  display:inline-flex;align-items:center;gap:8px;
+  color:var(--blue-3);font-size:11px;font-weight:700;letter-spacing:2.6px;
+}
+.tag::before{content:"";width:16px;height:1px;background:var(--blue-3);}
+
+.hero h1{font-size:clamp(32px,4.6vw,52px);line-height:1.08;margin:14px 0 14px;font-weight:700;}
+.hero p.lead{font-size:15px;line-height:1.65;color:#c4d8e8;max-width:560px;}
+
+.buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;}
+.btn{padding:13px 22px;border-radius:9px;font-size:12.5px;font-weight:700;display:inline-flex;align-items:center;gap:8px;text-align:center;border:none;cursor:pointer;font-family:inherit;transition:transform .2s var(--ease), box-shadow .2s var(--ease), background .2s var(--ease);}
+.primary{background:linear-gradient(135deg,var(--blue),#0670c9);color:white;box-shadow:0 14px 32px rgba(14,165,255,.32);position:relative;}
+.primary::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:0 0 0 0 rgba(14,165,255,.55);animation:beaconRing 2.6s ease-out infinite;}
+.primary:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(14,165,255,.42);}
+.secondary{border:1px solid rgba(255,255,255,.3);color:white;background:rgba(255,255,255,.04);position:relative;overflow:visible;}
+.secondary:hover{border-color:var(--blue-2);background:rgba(14,165,255,.08);}
+.secondary::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;box-shadow:0 0 0 0 rgba(14,165,255,.45);animation:beaconRing 3.2s ease-out infinite;animation-delay:1.4s;opacity:.7;}
+
+.proofs{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px;}
+.proofs span{font-size:10.5px;padding:6px 12px;border:1px solid rgba(255,255,255,.16);border-radius:30px;color:#cfe0ee;display:flex;align-items:center;gap:6px;}
+.proofs span svg{width:11px;height:11px;stroke:var(--blue-2);}
+.proofs span.sla{border-color:rgba(255,185,77,.4);color:#ffdba3;}
+.proofs span.sla svg{stroke:var(--gold);}
+
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:36px;border-top:1px solid rgba(255,255,255,.1);padding-top:22px;}
+.hero-stats div{padding-right:14px;}
+.hero-stats strong{font-family:'Space Grotesk';display:block;font-size:26px;color:white;font-weight:700;}
+.hero-stats span{font-size:10.5px;color:#9db3c6;letter-spacing:.3px;}
+
+/* ---- scanner device mockup ---- */
+.scanner-wrap{position:relative;z-index:2;display:flex;justify-content:center;animation:floatY 5.5s ease-in-out infinite;}
+.scanner{
+  width:290px;position:relative;
+  background:linear-gradient(160deg,#0d1420,#05090f);
+  border-radius:34px;padding:14px 14px 20px;
+  box-shadow:0 30px 70px rgba(0,10,25,.55), 0 0 0 1px rgba(14,165,255,.25), inset 0 0 0 1px rgba(255,255,255,.03);
+}
+.scanner-cams{display:flex;justify-content:center;gap:16px;padding:6px 0 12px;}
+.scanner-cams span{width:9px;height:9px;border-radius:50%;background:#1c2836;box-shadow:inset 0 0 0 1px rgba(56,189,248,.35);}
+.scanner-screen{
+  position:relative;height:340px;border-radius:22px;overflow:hidden;perspective:700px;
+  background:
+    radial-gradient(circle at 50% 30%, rgba(14,165,255,.35), transparent 60%),
+    linear-gradient(200deg,#122540,#040a14 70%);
+  transition:box-shadow .4s var(--ease);
+}
+.scanner-screen.granted{box-shadow:inset 0 0 60px rgba(14,165,255,.28);}
+.scanner-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(56,189,248,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,.08) 1px, transparent 1px);
+  background-size:22px 22px;
+}
+.scanner-ring{position:absolute;top:38%;left:50%;width:168px;height:168px;transform:translate(-50%,-50%) perspective(500px) rotateX(62deg);transform-style:preserve-3d;}
+.scanner-ring svg{width:100%;height:100%;animation:spin 6s linear infinite;}
+.scanner-ring circle{fill:none;stroke:var(--blue-2);stroke-width:1.6;stroke-dasharray:11 9;opacity:.6;}
+.scanner-ring2{position:absolute;top:38%;left:50%;width:128px;height:128px;transform:translate(-50%,-50%) perspective(500px) rotateX(62deg);transform-style:preserve-3d;}
+.scanner-ring2 svg{width:100%;height:100%;animation:spin 9s linear infinite reverse;}
+.scanner-ring2 circle{fill:none;stroke:var(--blue-3);stroke-width:1.2;stroke-dasharray:4 10;opacity:.5;}
+.scanner-screen.granted .scanner-ring2{opacity:0;transition:opacity .3s;}
+.scanner-face-wrap{
+  position:absolute;top:38%;left:50%;width:134px;height:134px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;overflow:hidden;
+  box-shadow:0 0 0 1px rgba(125,211,252,.4), 0 0 26px 6px rgba(14,165,255,.4);
+  animation:faceBreathe 4.2s ease-in-out infinite;
+}
+.scanner-face-wrap img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center center;
+  mix-blend-mode:screen;filter:brightness(1.1) saturate(1.2) contrast(1.05);
+  transform-origin:50% 50%;
+  animation:faceTilt 7s ease-in-out infinite;
+}
+@keyframes faceBreathe{0%,100%{transform:translate(-50%,-50%) scale(1);box-shadow:0 0 0 1px rgba(125,211,252,.4),0 0 26px 6px rgba(14,165,255,.4);}50%{transform:translate(-50%,-50%) scale(1.045);box-shadow:0 0 0 1px rgba(125,211,252,.55),0 0 34px 10px rgba(14,165,255,.55);}}
+@keyframes faceTilt{0%,100%{transform:rotate(0deg) scale(1.06);}25%{transform:rotate(-2.2deg) scale(1.1);}75%{transform:rotate(2.2deg) scale(1.1);}}
+.scanner-screen.granted .scanner-face-wrap{animation:faceVerified 1.8s ease-in-out infinite;}
+.scanner-screen.granted .scanner-face-wrap img{animation:none;transform:scale(1.06);filter:brightness(1.18) saturate(1.3) contrast(1.08);}
+@keyframes faceVerified{0%,100%{transform:translate(-50%,-50%) scale(1.02);box-shadow:0 0 0 2px rgba(34,212,122,.55),0 0 30px 8px rgba(34,212,122,.5);}50%{transform:translate(-50%,-50%) scale(1.06);box-shadow:0 0 0 2px rgba(34,212,122,.75),0 0 40px 12px rgba(34,212,122,.65);}}
+
+.scanner-mesh{position:absolute;top:28%;left:50%;transform:translate(-50%,-50%);width:100px;opacity:.9;}
+.scanner-mesh line{stroke:var(--blue-2);stroke-width:.6;opacity:.35;}
+.scanner-mesh circle{fill:var(--blue-3);animation:meshPulse 2.8s ease-in-out infinite;}
+.scanner-screen.granted .scanner-mesh{opacity:0;transition:opacity .25s;}
+@keyframes meshPulse{0%,100%{opacity:.15;r:1;}50%{opacity:1;r:1.8;}}
+
+.scanner-particles{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.scanner-particles span{position:absolute;bottom:-8px;width:3px;height:3px;border-radius:50%;background:var(--blue-3);box-shadow:0 0 6px 1px rgba(125,211,252,.75);animation:floatUp 5s linear infinite;}
+@keyframes floatUp{0%{transform:translateY(0) scale(1);opacity:0;}12%{opacity:.9;}100%{transform:translateY(-300px) scale(.4);opacity:0;}}
+.scanner-scanline{
+  position:absolute;left:8%;right:8%;height:2px;top:14%;
+  background:linear-gradient(90deg,transparent,var(--blue-2),transparent);
+  box-shadow:0 0 12px 2px rgba(56,189,248,.7);
+  animation:scanMove 2.6s ease-in-out infinite;
+}
+.scanner-screen.granted .scanner-scanline{opacity:0;}
+.scanner-logo{position:absolute;top:35%;left:50%;width:210px;display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;perspective:600px;transform:translate(-50%,-50%) rotateY(-90deg) scale(.9);transition:opacity .6s ease,transform .7s cubic-bezier(.22,.85,.3,1.25);pointer-events:none;}
+.scanner-logo svg{width:108px;height:108px;filter:drop-shadow(0 6px 16px rgba(14,165,255,.45));}
+.scanner-logo .lg-word{font-family:'Space Grotesk',sans-serif;font-size:21px;font-weight:700;letter-spacing:1px;color:#fff;position:relative;overflow:hidden;}
+.scanner-logo .lg-word span{color:var(--blue-3);}
+.scanner-logo .lg-word::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);opacity:0;}
+@keyframes shine{0%{left:-60%;opacity:0;}15%{opacity:.9;}100%{left:120%;opacity:0;}}
+.scanner-logo .lg-slogan{font-size:10px;letter-spacing:1.8px;color:var(--blue-3);text-transform:uppercase;font-weight:600;}
+.scanner-status{transition:opacity .4s ease;
+  position:absolute;bottom:52px;left:0;right:0;text-align:center;
+  font-family:'Space Grotesk';font-size:12px;font-weight:600;letter-spacing:1.6px;color:var(--blue-3);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.scanner-status .dot{width:6px;height:6px;border-radius:50%;background:var(--blue-2);animation:pulseDot 1.2s ease-in-out infinite;}
+.scanner-screen.granted .scanner-status{color:var(--ok);}
+.scanner-screen.granted .scanner-status .dot{background:var(--ok);}
+.scanner-screen.granted .scanner-ring{opacity:0;transition:opacity .3s;}
+.scanner-clock{position:absolute;bottom:14px;left:0;right:0;text-align:center;}
+.scanner-clock div:first-child{font-family:'Space Grotesk';font-size:19px;font-weight:600;color:white;letter-spacing:1px;}
+.scanner-clock div:last-child{font-size:9.5px;color:#7f93a5;letter-spacing:2px;margin-top:1px;}
+.scanner-led{position:absolute;right:24px;bottom:10px;width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px 2px rgba(34,212,122,.7);animation:pulseDot 1.6s ease-in-out infinite;}
+.scanner-caption{text-align:center;margin-top:16px;font-size:10.5px;color:#8ea3b5;letter-spacing:1px;}
+
+.scroll-cue{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:.75;transition:opacity .25s;}
+.scroll-cue:hover{opacity:1;}
+.scroll-cue span{font-size:9px;letter-spacing:2px;color:#9db3c6;}
+.scroll-cue svg{width:16px;height:16px;stroke:var(--blue-2);animation:scrollBounce 1.8s ease-in-out infinite;}
+@media(max-width:960px){.scroll-cue{display:none;}}
+
+/* ============================================================
+   QUICK-NAV STRIP
+   ============================================================ */
+.strip{background:var(--navy-950);color:white;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);}
+.strip-grid{display:grid;grid-template-columns:repeat(5,1fr);}
+.strip-item{padding:17px 10px;text-align:center;border-right:1px solid rgba(255,255,255,.08);font-size:11px;font-weight:600;color:#cfe0ee;display:flex;flex-direction:column;align-items:center;gap:6px;transition:background .2s, color .2s;}
+.strip-item:hover{background:rgba(14,165,255,.07);color:white;}
+.strip-item .num{display:flex;align-items:center;gap:6px;font-family:'Space Grotesk';font-size:15px;color:var(--blue-2);font-weight:700;}
+.strip-item .num i{width:5px;height:5px;border-radius:50%;background:var(--ok);animation:pulseDot 2s ease-in-out infinite;}
+
+/* ============================================================
+   FAIXA DE MARCAS (marquee)
+   ============================================================ */
+.brands{background:white;border-bottom:1px solid var(--line);padding:26px 0;overflow:hidden;}
+.brands-label{text-align:center;font-size:10.5px;letter-spacing:2px;color:var(--slate-2);font-weight:700;margin-bottom:16px;}
+.marquee{width:100%;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);}
+.marquee-track{display:flex;gap:60px;width:max-content;animation:marquee 26s linear infinite;}
+.marquee:hover .marquee-track{animation-play-state:paused;}
+.marquee-track span{font-family:'Space Grotesk';font-size:19px;font-weight:700;color:#b7c6d4;white-space:nowrap;transition:color .2s, transform .2s;}
+.marquee-track span:hover{color:var(--blue);transform:scale(1.08);}
+
+/* ============================================================
+   SECTIONS / GENERIC
+   ============================================================ */
+.section{padding:78px 0;}
+.section-dark{color:white;}
+.section-title{display:flex;justify-content:space-between;align-items:flex-end;gap:34px;margin-bottom:38px;}
+.section-title h2{font-size:36px;line-height:1.08;margin-top:8px;font-weight:700;}
+.section-title p{max-width:480px;font-size:13.5px;color:var(--slate);line-height:1.6;}
+.section-dark .section-title p{color:#a9bece;}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease), transform .7s var(--ease);}
+.reveal.visible{opacity:1;transform:none;}
+.reveal:nth-child(2){transition-delay:.06s;}
+.reveal:nth-child(3){transition-delay:.12s;}
+.reveal:nth-child(4){transition-delay:.18s;}
+.reveal:nth-child(5){transition-delay:.24s;}
+.reveal:nth-child(6){transition-delay:.3s;}
+.reveal:nth-child(7){transition-delay:.36s;}
+.reveal:nth-child(8){transition-delay:.42s;}
+
+/* ---- icon ---- */
+.icon{width:46px;height:46px;border-radius:13px;background:var(--ice-2);color:var(--blue);display:flex;align-items:center;justify-content:center;margin-bottom:16px;flex:none;}
+.icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;}
+.dark-card .icon{background:rgba(14,165,255,.12);}
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.card{
+  position:relative;background:white;border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;
+  box-shadow:var(--shadow-soft);transition:transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease);
+  overflow:hidden;
+}
+.card::before{
+  content:"";position:absolute;left:0;right:0;top:-40%;height:3px;
+  background:linear-gradient(90deg,transparent,var(--blue-2),transparent);
+  transition:top .7s var(--ease);opacity:0;
+}
+.card:hover::before{top:100%;opacity:1;transition:top .7s var(--ease), opacity .1s;}
+.card:hover{transform:translateY(-6px);box-shadow:var(--shadow-glow);border-color:rgba(14,165,255,.35);}
+.card::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .35s var(--ease);
+  background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%), rgba(14,165,255,.16), transparent 65%);}
+.card:hover::after{opacity:1;}
+.dark-card{background:var(--navy-800);border-color:rgba(255,255,255,.08);box-shadow:none;}
+.dark-card:hover{box-shadow:0 0 0 1px rgba(14,165,255,.4), 0 20px 50px rgba(14,165,255,.15);}
+
+.card h3{font-size:17.5px;margin-bottom:7px;font-weight:600;}
+.card p{font-size:12.5px;color:var(--slate);line-height:1.65;}
+.dark-card p{color:#aebfd0;}
+.card ul{margin-top:15px;display:grid;gap:7px;font-size:11.5px;color:#5b7186;}
+.dark-card ul{color:#bdcedd;}
+.card li{display:flex;align-items:center;gap:8px;}
+.card li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--blue);flex:none;}
+
+/* ---- AI detection corner-frame accent on first cftv card ---- */
+.detect-frame{position:absolute;top:20px;right:20px;width:34px;height:34px;opacity:.55;}
+.detect-frame span{position:absolute;width:9px;height:9px;border:2px solid var(--blue-2);}
+.detect-frame span:nth-child(1){top:0;left:0;border-right:none;border-bottom:none;}
+.detect-frame span:nth-child(2){top:0;right:0;border-left:none;border-bottom:none;}
+.detect-frame span:nth-child(3){bottom:0;left:0;border-right:none;border-top:none;}
+.detect-frame span:nth-child(4){bottom:0;right:0;border-left:none;border-top:none;}
+.dark-card:hover .detect-frame{animation:framePulse 1.2s ease-in-out infinite;}
+
+/* ---- crosshair cursor for CFTV section ---- */
+#cftv{cursor:crosshair;}
+
+/* ============================================================
+   CONTROLE DE ACESSO
+   ============================================================ */
+.access{
+  position:relative;overflow:hidden;
+  background:linear-gradient(160deg,#061525 0%,#0a1f35 45%,#071422 100%);
+  color:#e8f4ff;
+}
+.access::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(rgba(14,165,255,.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14,165,255,.18) 1px, transparent 1px);
+  background-size:40px 40px;
+  animation:techGridDrift 18s linear infinite;
+  opacity:.85;
+}
+.access::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 50% 40% at 20% 30%, rgba(14,165,255,.35), transparent 55%),
+    radial-gradient(ellipse 45% 35% at 80% 65%, rgba(56,189,248,.28), transparent 50%),
+    radial-gradient(ellipse 30% 25% at 55% 15%, rgba(14,165,255,.2), transparent 45%);
+  animation:techGlow 5s ease-in-out infinite alternate;
+}
+.access > .container{position:relative;z-index:1;}
+.access .tag{background:rgba(14,165,255,.15);color:var(--blue-3);border-color:rgba(14,165,255,.3);}
+.access h2{color:#f0f7ff;}
+.access p{color:#9db3c6 !important;}
+.access-list{color:#c5d8e8 !important;}
+.access-list div::before{background:var(--blue-2);box-shadow:0 0 0 3px rgba(56,189,248,.2);}
+.access-tech-nodes{
+  position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;
+}
+.access-tech-nodes span{
+  position:absolute;width:8px;height:8px;border-radius:50%;
+  background:#38bdf8;box-shadow:0 0 16px 4px rgba(56,189,248,.7);
+  animation:techNodeFloat 4.5s ease-in-out infinite;
+  opacity:.9;
+}
+.access-tech-nodes span:nth-child(1){left:8%;top:18%;animation-delay:0s;}
+.access-tech-nodes span:nth-child(2){left:22%;top:72%;animation-delay:1.2s;width:5px;height:5px;}
+.access-tech-nodes span:nth-child(3){left:48%;top:12%;animation-delay:.6s;}
+.access-tech-nodes span:nth-child(4){left:70%;top:55%;animation-delay:2s;width:6px;height:6px;}
+.access-tech-nodes span:nth-child(5){left:88%;top:28%;animation-delay:1.5s;}
+.access-tech-nodes span:nth-child(6){left:35%;top:85%;animation-delay:2.8s;width:5px;height:5px;}
+.access-tech-nodes span:nth-child(7){left:92%;top:78%;animation-delay:.9s;}
+.access-tech-nodes span:nth-child(8){left:15%;top:45%;animation-delay:2.2s;width:4px;height:4px;}
+/* linhas de circuito */
+.access-tech-nodes span::after{
+  content:"";position:absolute;left:50%;top:50%;
+  width:60px;height:1px;background:linear-gradient(90deg,rgba(56,189,248,.6),transparent);
+  transform-origin:left center;
+}
+.access-tech-nodes span:nth-child(odd)::after{transform:rotate(25deg);}
+.access-tech-nodes span:nth-child(even)::after{transform:rotate(-35deg);width:80px;}
+@keyframes techGridDrift{
+  0%{background-position:0 0, 0 0;}
+  100%{background-position:40px 40px, 40px 40px;}
+}
+@keyframes techGlow{
+  0%{opacity:.75;}
+  100%{opacity:1;}
+}
+
+.access-scanline{
+  position:absolute;left:0;right:0;height:2px;top:0;
+  background:linear-gradient(90deg,transparent,rgba(56,189,248,.7),transparent);
+  box-shadow:0 0 20px 4px rgba(14,165,255,.4);
+  animation:accessScan 4s linear infinite;
+  opacity:.8;
+}
+@keyframes accessScan{
+  0%{top:0%;opacity:0;}
+  10%{opacity:.9;}
+  90%{opacity:.9;}
+  100%{top:100%;opacity:0;}
+}
+@keyframes techNodeFloat{
+  0%,100%{transform:translateY(0) scale(1);opacity:.55;}
+  50%{transform:translateY(-18px) scale(1.35);opacity:1;}
+}
+.access-grid{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:center;}
+.access-list{display:grid;gap:11px;margin-top:22px;font-size:13.5px;color:#c5d8e8;}
+.access-list div{display:flex;align-items:center;gap:10px;}
+.access-list div::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--blue);flex:none;box-shadow:0 0 0 3px rgba(14,165,255,.15);}
+
+.facial-slider-container{
+  width:100%;max-width:440px;height:400px;margin:0 auto;
+  background:
+    radial-gradient(ellipse 55% 45% at 50% 42%, rgba(14,165,255,.2), transparent 70%),
+    linear-gradient(160deg,#0b1f38 0%,#040c18 55%,#020810 100%);
+  border-radius:26px;overflow:hidden;position:relative;
+  box-shadow:0 25px 60px rgba(4,26,50,.2), 0 0 0 1px rgba(14,165,255,.25);
+}
+.facial-slider-container .face-fallback{
+  position:absolute;inset:0;z-index:0;display:flex;align-items:center;justify-content:center;
+  pointer-events:none;
+}
+.facial-slider-container .face-fallback svg{width:130px;height:160px;opacity:.55;}
+.facial-slider-container::after{
+  content:"";position:absolute;inset:0;pointer-events:none;border-radius:26px;z-index:2;
+  box-shadow:inset 0 0 60px rgba(14,165,255,.15);
+  background:linear-gradient(180deg,transparent 30%,rgba(56,189,248,.12) 48%,transparent 55%);
+  background-size:100% 220%;
+  animation:scanMove 3.2s ease-in-out infinite;
+}
+.facial-slider-container .frame-corner{position:absolute;width:26px;height:26px;border-color:var(--blue-2);z-index:3;pointer-events:none;opacity:.85;}
+.frame-corner.tl{top:14px;left:14px;border-top:2px solid;border-left:2px solid;}
+.frame-corner.tr{top:14px;right:14px;border-top:2px solid;border-right:2px solid;}
+.frame-corner.bl{bottom:14px;left:14px;border-bottom:2px solid;border-left:2px solid;}
+.frame-corner.br{bottom:14px;right:14px;border-bottom:2px solid;border-right:2px solid;}
+.facial-slide{position:absolute;inset:0;opacity:0;transition:opacity 1s ease-in-out;z-index:1;}
+.facial-slide.active{opacity:1;}
+.facial-slide img{width:100%;height:100%;object-fit:cover;display:block;}
+.facial-badge{position:absolute;left:18px;bottom:18px;z-index:3;display:flex;align-items:center;gap:7px;font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--blue-3);background:rgba(3,11,22,.55);padding:7px 12px;border-radius:30px;backdrop-filter:blur(6px);}
+.facial-badge i{width:6px;height:6px;border-radius:50%;background:var(--ok);animation:pulseDot 1.6s ease-in-out infinite;}
+
+/* Celular — registro de entradas/saídas */
+.access-visual{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;}
+.access-visual .facial-slider-container{max-width:380px;height:360px;margin:0;}
+.phone-mock{
+  width:260px;background:#0a1628;border-radius:32px;padding:12px;flex:none;
+  box-shadow:0 24px 56px rgba(4,26,50,.4), inset 0 0 0 2px rgba(255,255,255,.08);
+  position:relative;z-index:2;
+}
+.phone-screen{min-height:420px !important;}
+.phone-mock::before{
+  content:"";position:absolute;top:14px;left:50%;transform:translateX(-50%);
+  width:64px;height:6px;border-radius:6px;background:#1a2a3c;
+}
+.phone-screen{
+  background:linear-gradient(180deg,#0d1f35,#071018);border-radius:20px;overflow:hidden;
+  min-height:340px;display:flex;flex-direction:column;
+}
+.phone-status{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 14px 6px;font-size:9px;color:#9db3c6;font-weight:600;
+}
+.phone-app-bar{
+  padding:8px 14px 12px;border-bottom:1px solid rgba(14,165,255,.15);
+}
+.phone-app-bar .app-name{font-size:12px;font-weight:700;color:#e8f4ff;letter-spacing:.3px;}
+.phone-app-bar .app-sub{font-size:9px;color:#6b8aa3;margin-top:2px;}
+.phone-live{
+  display:inline-flex;align-items:center;gap:5px;margin-top:6px;
+  font-size:8px;font-weight:700;letter-spacing:1px;color:var(--ok);
+}
+.phone-live i{width:5px;height:5px;border-radius:50%;background:var(--ok);animation:pulseDot 1.4s ease-in-out infinite;}
+.phone-logs{flex:1;overflow:hidden;padding:8px 10px 12px;display:flex;flex-direction:column;gap:6px;}
+.phone-log{
+  display:flex;align-items:center;gap:8px;padding:8px 9px;
+  background:rgba(14,165,255,.06);border:1px solid rgba(14,165,255,.12);
+  border-radius:10px;animation:logIn .45s var(--ease) both;
+}
+.phone-log .avatar{
+  width:28px;height:28px;border-radius:50%;flex:none;
+  background:linear-gradient(135deg,#1e4a7a,#0ea5ff);
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:700;color:#fff;
+}
+.phone-log .info{flex:1;min-width:0;}
+.phone-log .info .name{font-size:10px;font-weight:700;color:#e8f4ff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.phone-log .info .meta{font-size:8px;color:#6b8aa3;margin-top:1px;}
+.phone-log .badge{
+  font-size:8px;font-weight:700;padding:3px 7px;border-radius:20px;flex:none;letter-spacing:.3px;
+}
+.phone-log .badge.in{background:rgba(34,212,122,.15);color:#22d47a;border:1px solid rgba(34,212,122,.3);}
+.phone-log .badge.out{background:rgba(251,146,60,.15);color:#fb923c;border:1px solid rgba(251,146,60,.3);}
+@keyframes logIn{
+  from{opacity:0;transform:translateY(-10px);}
+  to{opacity:1;transform:none;}
+}
+@media(max-width:960px){
+  .access-visual{flex-direction:column;}
+  .phone-mock{width:200px;}
+}
+
+/* ============================================================
+   CALCULADORA DE CÂMERAS
+   ============================================================ */
+.calc{
+  position:relative;overflow:hidden;
+  background:linear-gradient(165deg,#b8d4ea 0%,#a8cce6 40%,#c5daf0 100%);
+}
+.calc::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(rgba(14,165,255,.22) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14,165,255,.22) 1px, transparent 1px);
+  background-size:42px 42px;
+  animation:techGridDrift 22s linear infinite;
+  opacity:1;
+}
+.calc::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 45% 40% at 12% 25%, rgba(14,165,255,.2), transparent 55%),
+    radial-gradient(ellipse 40% 35% at 88% 70%, rgba(56,189,248,.16), transparent 50%),
+    radial-gradient(ellipse 30% 25% at 50% 90%, rgba(14,165,255,.12), transparent 45%);
+  animation:techGlow 6s ease-in-out infinite alternate;
+}
+.calc > .container{position:relative;z-index:1;}
+.calc-tech-nodes{
+  position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;
+}
+.calc-tech-nodes span{
+  position:absolute;width:7px;height:7px;border-radius:50%;
+  background:#0ea5ff;box-shadow:0 0 14px 3px rgba(14,165,255,.55);
+  animation:techNodeFloat 5s ease-in-out infinite;
+  opacity:.75;
+}
+.calc-tech-nodes span:nth-child(1){left:6%;top:20%;}
+.calc-tech-nodes span:nth-child(2){left:18%;top:75%;animation-delay:1s;width:5px;height:5px;}
+.calc-tech-nodes span:nth-child(3){left:42%;top:10%;animation-delay:.4s;}
+.calc-tech-nodes span:nth-child(4){left:65%;top:60%;animation-delay:1.8s;width:6px;height:6px;}
+.calc-tech-nodes span:nth-child(5){left:90%;top:25%;animation-delay:1.2s;}
+.calc-tech-nodes span:nth-child(6){left:78%;top:82%;animation-delay:2.4s;width:4px;height:4px;}
+.calc-tech-nodes span:nth-child(7){left:30%;top:88%;animation-delay:.8s;}
+.calc-tech-nodes span:nth-child(8){left:55%;top:40%;animation-delay:2s;width:5px;height:5px;}
+.calc-tech-nodes .calc-scan{
+  position:absolute;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(14,165,255,.45),transparent);
+  box-shadow:0 0 18px 3px rgba(14,165,255,.25);
+  animation:accessScan 6s linear infinite;
+  opacity:.6;
+}
+.calc-box{
+  background:rgba(255,255,255,.92);border:1px solid rgba(14,165,255,.15);border-radius:var(--r-lg);
+  box-shadow:var(--shadow-soft), 0 0 0 1px rgba(255,255,255,.5);
+  backdrop-filter:blur(8px);
+  padding:34px;display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start;
+  position:relative;z-index:1;
+}
+.calc-form{display:grid;gap:16px;}
+.calc-field label{font-size:11px;font-weight:700;color:var(--slate);letter-spacing:.4px;display:block;margin-bottom:6px;}
+.calc-field select,.calc-field input{width:100%;padding:13px;border:1px solid var(--line);border-radius:9px;font-size:13px;font-family:inherit;outline:none;transition:border-color .2s, box-shadow .2s;}
+.calc-field select:focus,.calc-field input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(14,165,255,.14);}
+.calc-result{background:linear-gradient(150deg,var(--navy-950),var(--navy-800));border-radius:var(--r-lg);padding:28px;color:white;position:relative;overflow:hidden;min-height:280px;display:flex;flex-direction:column;justify-content:center;}
+.calc-result .tag{margin-bottom:6px;position:relative;z-index:2;}
+.calc-metric{display:flex;align-items:baseline;gap:10px;margin:10px 0;position:relative;z-index:2;}
+.calc-metric strong{font-family:'Space Grotesk';font-size:44px;font-weight:700;color:var(--blue-2);}
+.calc-metric span{font-size:12.5px;color:#c4d8e8;}
+.calc-note{font-size:11px;color:#8ea3b5;margin-top:14px;line-height:1.6;position:relative;z-index:2;}
+.calc-empty{color:#9db3c6;font-size:13px;text-align:center;position:relative;z-index:2;line-height:1.55;max-width:240px;margin:0 auto;}
+.calc-result-body{position:relative;z-index:2;}
+.calc-result .btn{position:relative;z-index:2;}
+
+/* Efeito tech no painel de estimativa */
+.calc-fx{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.calc-fx .fx-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(14,165,255,.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14,165,255,.12) 1px, transparent 1px);
+  background-size:28px 28px;
+  opacity:.5;animation:techGridDrift 20s linear infinite;
+}
+.calc-fx .fx-radar{
+  position:absolute;left:50%;top:48%;width:180px;height:180px;
+  transform:translate(-50%,-50%);border-radius:50%;
+  border:1px solid rgba(14,165,255,.25);
+  box-shadow:0 0 0 24px rgba(14,165,255,.04), 0 0 0 48px rgba(14,165,255,.03);
+}
+.calc-fx .fx-radar::before{
+  content:"";position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(from 0deg, transparent 0deg, rgba(56,189,248,.45) 50deg, transparent 80deg);
+  animation:calcRadarSpin 3.2s linear infinite;
+}
+.calc-fx .fx-radar::after{
+  content:"";position:absolute;left:50%;top:50%;width:8px;height:8px;border-radius:50%;
+  transform:translate(-50%,-50%);background:#38bdf8;
+  box-shadow:0 0 14px 4px rgba(56,189,248,.7);
+  animation:pulseDot 1.6s ease-in-out infinite;
+}
+.calc-fx .fx-cam{
+  position:absolute;width:28px;height:28px;border-radius:8px;
+  background:rgba(14,165,255,.12);border:1px solid rgba(56,189,248,.35);
+  display:flex;align-items:center;justify-content:center;
+  animation:calcCamFloat 4s ease-in-out infinite;
+}
+.calc-fx .fx-cam svg{width:14px;height:14px;stroke:#7dd3fc;fill:none;stroke-width:1.6;}
+.calc-fx .fx-cam.c1{left:12%;top:18%;animation-delay:0s;}
+.calc-fx .fx-cam.c2{right:14%;top:22%;animation-delay:1.1s;}
+.calc-fx .fx-cam.c3{left:18%;bottom:16%;animation-delay:.5s;}
+.calc-fx .fx-cam.c4{right:16%;bottom:20%;animation-delay:1.6s;}
+.calc-fx .fx-scan{
+  position:absolute;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(56,189,248,.65),transparent);
+  box-shadow:0 0 16px 3px rgba(14,165,255,.35);
+  animation:accessScan 5s linear infinite;
+  opacity:.7;
+}
+@keyframes calcRadarSpin{to{transform:rotate(360deg);}}
+@keyframes calcCamFloat{
+  0%,100%{transform:translateY(0);opacity:.7;}
+  50%{transform:translateY(-8px);opacity:1;}
+}
+
+/* ============================================================
+   ALARME
+   ============================================================ */
+.alarm{color:white;}
+.offer-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.offer{position:relative;padding:32px;border-radius:var(--r-lg);background:linear-gradient(150deg,#0b2c4c,#0c4675);border:1px solid rgba(255,255,255,.1);overflow:hidden;transition:transform .35s var(--ease), box-shadow .35s var(--ease);}
+.offer:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(4,26,50,.35);}
+.offer::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .35s var(--ease);
+  background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,.08), transparent 65%);}
+.offer:hover::after{opacity:1;}
+.offer-green{background:linear-gradient(150deg,#073a30,#0a5c4c);}
+.offer h3{font-size:27px;margin:10px 0 12px;font-weight:700;}
+.offer p{font-size:13px;color:#c9dbe8;max-width:480px;line-height:1.6;}
+.offer .btn{margin-top:22px;}
+.beacon-icon{width:40px;height:40px;position:relative;}
+.beacon-icon svg{width:100%;height:100%;stroke:var(--blue-2);fill:none;stroke-width:1.8;}
+.beacon-icon::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:1px solid var(--blue-2);opacity:0;animation:beaconRing 2s ease-out infinite;}
+.offer-green .beacon-icon svg{stroke:#4be3b9;}
+.offer-green .beacon-icon::after{border-color:#4be3b9;}
+
+/* ============================================================
+   REDES
+   ============================================================ */
+.network{background:#eef6fc;}
+.network-grid{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:center;}
+.network-list{display:grid;gap:11px;margin-top:20px;font-size:13.5px;color:var(--ink);}
+.network-list div{display:flex;align-items:center;gap:10px;}
+.network-list div::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--blue);flex:none;box-shadow:0 0 0 3px rgba(14,165,255,.15);}
+.network-box{
+  background:linear-gradient(160deg,#0b1f38,#040c18);min-height:320px;border-radius:24px;position:relative;overflow:hidden;padding:32px;color:white;
+  box-shadow:0 25px 60px rgba(4,26,50,.2);
+}
+.network-box svg.mesh{position:absolute;inset:0;width:100%;height:100%;opacity:.5;}
+.network-box .mesh circle{animation:pulseDot 3s ease-in-out infinite;}
+.network-box h3{font-size:27px;margin-top:24px;font-weight:700;position:relative;z-index:2;}
+.network-box span{color:var(--blue-2);}
+.network-box .netcheck{margin-top:26px;display:grid;gap:10px;font-size:13px;color:#c1d4e2;position:relative;z-index:2;}
+.network-box .netcheck div{display:flex;align-items:center;gap:9px;}
+.network-box .netcheck div::before{content:"✓";color:var(--blue-2);font-weight:700;}
+
+/* Download / Upload animado (somente Redes) */
+.demo-download{margin-top:18px;position:relative;z-index:2;}
+.demo-download .dl-bar-wrap{
+  background:rgba(255,255,255,.06);border-radius:8px;height:10px;overflow:hidden;
+  border:1px solid rgba(14,165,255,.2);margin-bottom:10px;
+}
+.demo-download .dl-bar{
+  height:100%;width:0%;border-radius:8px;
+  background:linear-gradient(90deg,var(--blue),var(--blue-2),var(--blue-3));
+  background-size:200% 100%;
+  animation:dlFill 3.5s ease-in-out infinite, gradientShift 2s linear infinite;
+  box-shadow:0 0 12px rgba(14,165,255,.45);
+}
+.demo-download .dl-stats{
+  display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#aebfd0;gap:12px;
+}
+.demo-download .dl-stats strong{
+  font-family:'Space Grotesk';font-size:18px;color:var(--blue-2);font-weight:700;
+}
+.demo-download .dl-stats small{font-size:11px;color:#8ea3b5;font-weight:500;margin-left:2px;}
+.demo-download .dl-stats #upSpeed{color:#34d399;}
+.demo-download .dl-mb{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap;}
+.demo-download .dl-mb span{
+  font-size:10px;padding:4px 10px;border-radius:20px;
+  background:rgba(14,165,255,.12);color:var(--blue-3);font-weight:600;
+  border:1px solid rgba(14,165,255,.2);
+  animation:dlChip 3.5s ease-in-out infinite;
+}
+.demo-download .dl-mb span:nth-child(2){animation-delay:.4s;}
+.demo-download .dl-mb span:nth-child(3){animation-delay:.8s;}
+@keyframes dlFill{
+  0%{width:5%;}15%{width:28%;}40%{width:62%;}70%{width:88%;}90%{width:100%;}100%{width:5%;}
+}
+@keyframes dlChip{
+  0%,20%{opacity:.4;transform:scale(.95);}40%,80%{opacity:1;transform:scale(1);}100%{opacity:.4;transform:scale(.95);}
+}
+
+/* ============================================================
+   OUTROS SERVIÇOS
+   ============================================================ */
+.services{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.service{position:relative;overflow:hidden;padding:23px;background:var(--navy-800);border-radius:var(--r-md);color:white;border:1px solid rgba(255,255,255,.08);transition:transform .3s var(--ease), border-color .3s var(--ease);}
+.service:hover{transform:translateY(-4px);border-color:rgba(14,165,255,.4);}
+.service::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .35s var(--ease);
+  background:radial-gradient(220px circle at var(--mx,50%) var(--my,50%), rgba(14,165,255,.18), transparent 65%);}
+.service:hover::after{opacity:1;}
+.service:hover .icon svg{animation:iconPop .5s var(--ease);}
+.service .icon{width:38px;height:38px;border-radius:10px;}
+.service .icon svg{width:18px;height:18px;}
+.service h3{font-size:14.5px;margin-bottom:6px;font-weight:600;}
+.service p{font-size:10.5px;color:#aebfd0;line-height:1.55;}
+
+/* ============================================================
+   ÁREA DE ATUAÇÃO
+   ============================================================ */
+.coverage{background:white;}
+.coverage-grid{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:center;}
+.coverage-tags{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px;}
+.coverage-tags span{font-size:11.5px;font-weight:600;padding:8px 14px;border-radius:30px;background:var(--ice-2);color:var(--ink);border:1px solid var(--line);}
+.radar-box{position:relative;width:100%;max-width:420px;aspect-ratio:1/1;margin:0 auto;border-radius:50%;background:radial-gradient(circle,var(--navy-800),var(--navy-950) 75%);box-shadow:0 25px 60px rgba(4,26,50,.25);}
+.radar-box::before,.radar-box::after{content:"";position:absolute;border:1px solid rgba(14,165,255,.22);border-radius:50%;}
+.radar-box::before{inset:14%;}
+.radar-box::after{inset:34%;}
+.radar-ring3{position:absolute;inset:54%;border:1px solid rgba(14,165,255,.22);border-radius:50%;}
+.radar-sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg, rgba(56,189,248,.35), transparent 32%);animation:spin 4.5s linear infinite;}
+.radar-hub{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--blue-2);box-shadow:0 0 18px 6px rgba(56,189,248,.6);z-index:3;}
+.radar-hub-label{position:absolute;top:calc(50% + 14px);left:50%;transform:translateX(-50%);font-size:10px;font-weight:700;letter-spacing:1px;color:var(--blue-3);white-space:nowrap;z-index:3;}
+.radar-point{position:absolute;width:8px;height:8px;border-radius:50%;background:white;box-shadow:0 0 8px 2px rgba(255,255,255,.5);animation:pulseDot 2.4s ease-in-out infinite;z-index:3;}
+.radar-point::after{content:"";position:absolute;inset:-6px;border-radius:50%;background:rgba(255,255,255,.85);opacity:0;transform:scale(.4);pointer-events:none;
+  animation:radarBlip 4.5s ease-in-out infinite;animation-delay:var(--blipDelay,0s);}
+.radar-point-label{position:absolute;font-size:9.5px;font-weight:600;color:#cfe0ee;white-space:nowrap;z-index:3;}
+.coverage .secondary{color:var(--ink);border-color:var(--line);background:var(--ice-2);}
+.coverage .secondary:hover{background:rgba(14,165,255,.1);border-color:var(--blue-2);}
+
+/* ============================================================
+   COMO FUNCIONA A CENTRAL (monitor)
+   ============================================================ */
+.monitor{color:white;}
+.monitor-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;position:relative;}
+.monitor-steps::before{content:"";position:absolute;top:23px;left:8%;right:8%;height:1px;background:repeating-linear-gradient(90deg,rgba(56,189,248,.35) 0 6px,transparent 6px 12px);z-index:0;}
+.monitor-step{position:relative;z-index:1;text-align:center;}
+.monitor-step .num-badge{width:46px;height:46px;border-radius:50%;background:var(--navy-950);border:1px solid rgba(56,189,248,.4);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-family:'Space Grotesk';font-weight:700;color:var(--blue-2);}
+.monitor-step h4{font-size:14.5px;margin-bottom:7px;font-weight:600;}
+.monitor-step p{font-size:11.5px;color:#aebfd0;line-height:1.6;max-width:220px;margin:0 auto;}
+.monitor-badges{display:flex;justify-content:center;gap:30px;flex-wrap:wrap;margin-top:44px;padding-top:34px;border-top:1px solid rgba(255,255,255,.08);}
+.monitor-badge{text-align:center;}
+.monitor-badge strong{font-family:'Space Grotesk';font-size:24px;color:var(--blue-2);display:block;}
+.monitor-badge span{font-size:10.5px;color:#9db3c6;letter-spacing:.5px;}
+
+/* ============================================================
+   PLANOS
+   ============================================================ */
+.plans{background:#eef6fc;}
+.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch;}
+.plan{background:white;border:1px solid var(--line);border-radius:var(--r-lg);padding:30px 26px;box-shadow:var(--shadow-soft);display:flex;flex-direction:column;transition:transform .3s var(--ease), box-shadow .3s var(--ease);}
+.plan:hover{transform:translateY(-6px);box-shadow:var(--shadow-glow);}
+.plan.featured{background:linear-gradient(160deg,var(--navy-950),var(--navy-800));color:white;border-color:transparent;position:relative;}
+.plan.featured::before{content:"MAIS PROCURADO";position:absolute;top:0;right:26px;transform:translateY(-50%);background:var(--blue);color:white;font-size:9.5px;font-weight:700;letter-spacing:1px;padding:6px 12px;border-radius:20px;}
+.plan h3{font-size:19px;margin-bottom:6px;font-weight:700;}
+.plan .plan-price{font-size:12px;color:var(--slate);margin-bottom:18px;}
+.plan.featured .plan-price{color:#c4d8e8;}
+.plan ul{display:grid;gap:10px;font-size:12.5px;margin-bottom:24px;flex:1;}
+.plan li{display:flex;align-items:flex-start;gap:9px;color:var(--slate);}
+.plan.featured li{color:#dceaf4;}
+.plan li::before{content:"✓";color:var(--blue);font-weight:700;flex:none;}
+.plan.featured li::before{color:var(--blue-2);}
+.plan .secondary{color:var(--ink);border-color:var(--line);background:var(--ice-2);}
+.plan .secondary:hover{background:rgba(14,165,255,.1);border-color:var(--blue-2);}
+.plan .secondary::after{box-shadow:0 0 0 0 rgba(14,165,255,.3);}
+
+/* ============================================================
+   DEPOIMENTOS
+   ============================================================ */
+.testi{background:white;}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.testi-card{background:var(--ice-2);border-radius:var(--r-lg);padding:26px;position:relative;overflow:hidden;border:1px solid var(--line);transition:transform .3s var(--ease), box-shadow .3s var(--ease);}
+.testi-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-soft);}
+.testi-card::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .35s var(--ease);
+  background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%), rgba(14,165,255,.12), transparent 65%);}
+.testi-card:hover::after{opacity:1;}
+.testi-avatar{transition:transform .35s var(--ease);}
+.testi-card:hover .testi-avatar{transform:rotate(-6deg) scale(1.08);}
+.testi-stars{display:flex;gap:3px;margin-bottom:14px;}
+.testi-stars svg{width:14px;height:14px;fill:var(--gold);stroke:none;}
+.testi-card p{font-size:13px;color:var(--ink);line-height:1.7;font-style:italic;}
+.testi-who{display:flex;align-items:center;gap:11px;margin-top:18px;}
+.testi-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--blue),#0670c9);display:flex;align-items:center;justify-content:center;color:white;font-family:'Space Grotesk';font-weight:700;font-size:14px;flex:none;}
+.testi-who strong{display:block;font-size:12.5px;}
+.testi-who span{font-size:10.5px;color:var(--slate-2);}
+
+/* ============================================================
+   GALERIA ANTES/DEPOIS
+   ============================================================ */
+.gallery{background:#eef6fc;}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.gal-pair{background:white;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-soft);border:1px solid var(--line);transition:transform .35s var(--ease), box-shadow .35s var(--ease);}
+.gal-pair:hover{transform:translateY(-6px);box-shadow:var(--shadow-glow);}
+.gal-imgs{display:grid;grid-template-columns:1fr 1fr;}
+.gal-img{position:relative;aspect-ratio:4/3;background:linear-gradient(150deg,var(--navy-800),var(--navy-950));overflow:hidden;}
+.gal-img img{width:100%;height:100%;object-fit:cover;position:relative;z-index:1;transition:transform .5s var(--ease);}
+.gal-pair:hover .gal-img img{transform:scale(1.06);}
+.gal-img::after{content:attr(data-label);position:absolute;left:8px;bottom:8px;z-index:2;font-size:9px;font-weight:700;letter-spacing:1px;color:white;background:rgba(3,11,22,.6);padding:4px 8px;border-radius:20px;}
+.gal-img.fallback{display:flex;align-items:center;justify-content:center;color:#3f5a78;}
+.gal-img.fallback svg{width:28px;height:28px;stroke:#3f5a78;opacity:.6;}
+.gal-caption{padding:16px 18px;font-size:12px;color:var(--slate);}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq-sec{color:white;}
+.faq-list{max-width:760px;margin:0 auto;display:grid;gap:12px;}
+.faq-item{background:var(--navy-800);border:1px solid rgba(255,255,255,.08);border-radius:var(--r-md);overflow:hidden;}
+.faq-item summary{list-style:none;padding:18px 22px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;font-weight:600;font-size:13.5px;}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-item .chevron{width:18px;height:18px;flex:none;stroke:var(--blue-2);transition:transform .25s var(--ease);}
+.faq-item[open] .chevron{transform:rotate(180deg);}
+.faq-item .faq-a{padding:0 22px 20px;font-size:12.5px;color:#aebfd0;line-height:1.7;animation:faqFade .35s var(--ease);}
+.faq-item summary{transition:color .2s;}
+.faq-item:hover summary{color:var(--blue-3);}
+
+/* ============================================================
+   ORÇAMENTO
+   ============================================================ */
+.quote{background:linear-gradient(115deg,var(--navy-950),var(--navy-800));color:white;position:relative;overflow:hidden;}
+.quote-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:46px;align-items:center;position:relative;z-index:2;}
+.quote h2{font-size:41px;line-height:1.08;margin:12px 0 15px;font-weight:700;}
+.quote-text{color:#c1d4e2;font-size:13.5px;max-width:470px;line-height:1.65;}
+.contact-info{margin-top:22px;display:grid;gap:9px;font-size:13.5px;}
+.contact-info div{display:flex;align-items:center;gap:9px;}
+.contact-info svg{width:15px;height:15px;stroke:var(--blue-2);fill:none;stroke-width:1.8;}
+
+.form{background:white;color:var(--ink);border-radius:var(--r-lg);padding:28px;box-shadow:0 30px 70px rgba(0,10,25,.35);}
+.form h3{font-size:20px;margin-bottom:16px;font-weight:700;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.field{display:flex;flex-direction:column;gap:5px;}
+.full{grid-column:1/-1;}
+label{font-size:9.5px;font-weight:700;color:var(--slate);letter-spacing:.6px;}
+input,select,textarea{font-family:inherit;font-size:12px;padding:12px;border:1px solid var(--line);border-radius:8px;outline:none;width:100%;transition:border-color .2s, box-shadow .2s;}
+input:focus,select:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(14,165,255,.14);}
+textarea{height:80px;resize:vertical;}
+.form button{border:none;cursor:pointer;width:100%;justify-content:center;}
+.form-note{font-size:10px;color:var(--slate-2);margin-top:10px;display:flex;align-items:center;gap:6px;}
+.form-note svg{width:11px;height:11px;stroke:var(--blue);}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{color:white;padding:46px 0 18px;border-top:1px solid rgba(255,255,255,.06);}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px;}
+.footer-grid .logo-mark{width:38px;height:38px;}
+footer h4{font-size:12px;margin-bottom:12px;letter-spacing:1px;color:#8ea3b5;}
+footer p,footer li{font-size:11px;color:#9db3c6;line-height:1.8;}
+footer li a:hover{color:var(--blue-2);}
+footer .logo p{margin-top:16px;max-width:230px;}
+.copy{border-top:1px solid rgba(255,255,255,.1);margin-top:28px;padding-top:15px;font-size:9.5px;color:#5b7186;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+/* ============================================================
+   FLOATING BUTTONS + CHAT TEASER
+   ============================================================ */
+.floating-buttons{position:fixed;right:22px;bottom:22px;display:flex;flex-direction:column;align-items:flex-end;gap:13px;z-index:999;}
+.float-btn{position:relative;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;box-shadow:0 10px 28px rgba(0,0,0,.35);transition:transform .2s var(--ease);text-decoration:none;}
+.float-btn svg{display:block;}
+.float-btn:hover{transform:scale(1.1);}
+.float-wa{background:#25D366;}
+.float-wa svg{animation:floatShake 8s ease-in-out infinite;transform-origin:center;}
+.float-wa .online-dot{position:absolute;top:1px;right:1px;border:2px solid white;}
+.float-ig{background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fdf497 5%,#fd5949 45%,#d6249f 60%,#285AEB 90%);}
+.chat-teaser{
+  max-width:230px;background:white;border-radius:14px 14px 4px 14px;padding:12px 14px;box-shadow:0 14px 34px rgba(4,26,50,.22);
+  font-size:11.5px;color:var(--ink);line-height:1.5;position:relative;opacity:0;transform:translateY(10px) scale(.96);pointer-events:none;transition:all .35s var(--ease);
+}
+.chat-teaser.show{opacity:1;transform:none;pointer-events:auto;}
+.chat-teaser .typing-cursor{display:inline-block;width:2px;height:12px;background:var(--slate);margin-left:1px;vertical-align:middle;animation:blinkCursor .9s steps(1) infinite;}
+.chat-teaser button{position:absolute;top:4px;right:6px;background:none;border:none;color:var(--slate-2);font-size:13px;cursor:pointer;padding:2px;line-height:1;}
+
+/* ============================================================
+   KEYFRAMES
+   ============================================================ */
+@keyframes pulseDot{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.45;transform:scale(.75);}}
+@keyframes spin{to{transform:rotate(360deg);}}
+@keyframes scanMove{0%{top:10%;opacity:0;}10%{opacity:1;}50%{top:84%;opacity:1;}60%{opacity:0;}100%{top:10%;opacity:0;}}
+@keyframes beaconRing{0%{box-shadow:0 0 0 0 rgba(14,165,255,.5);opacity:1;}100%{box-shadow:0 0 0 16px rgba(14,165,255,0);opacity:0;}}
+@keyframes framePulse{0%,100%{opacity:.55;}50%{opacity:1;}}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@keyframes blinkCursor{50%{opacity:0;}}
+@keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes floatY{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+@keyframes iconPop{0%{transform:scale(1) rotate(0);}45%{transform:scale(1.18) rotate(-6deg);}100%{transform:scale(1) rotate(0);}}
+@keyframes scrollBounce{0%,100%{transform:translateY(0);opacity:.6;}50%{transform:translateY(6px);opacity:1;}}
+@keyframes faqFade{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:none;}}
+@keyframes radarBlip{0%,84%,100%{opacity:0;transform:scale(.4);}50%{opacity:1;transform:scale(1.7);}64%{opacity:0;transform:scale(2.3);}}
+@keyframes floatShake{0%,90%,100%{transform:rotate(0);}91.5%{transform:rotate(-10deg);}93%{transform:rotate(9deg);}94.5%{transform:rotate(-7deg);}96%{transform:rotate(5deg);}97.5%{transform:rotate(-3deg);}99%{transform:rotate(0);}}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:960px){
+  .menu{display:none;}
+  .burger{display:flex;}
+  .strip-grid{grid-template-columns:repeat(3,1fr);}
+  .strip-item:nth-child(n+4){display:none;}
+  .cards,.services,.access-grid,.network-grid,.offer-grid,.quote-grid,.footer-grid,.hero-grid,.calc-box,.coverage-grid,.plans-grid,.testi-grid,.gallery-grid{grid-template-columns:1fr;}
+  .hero-grid{padding:44px 0 40px;}
+  .hero-stats{grid-template-columns:repeat(2,1fr);row-gap:18px;}
+  .scanner-wrap{order:-1;margin-bottom:6px;}
+  .section-title{display:block;}
+  .section-title p{margin-top:10px;}
+  .monitor-steps{grid-template-columns:1fr 1fr;row-gap:28px;}
+  .monitor-steps::before{display:none;}
+  .chat-teaser{display:none;}
+}
+@media(max-width:600px){
+  .hero h1{font-size:30px;}
+  .strip-grid{grid-template-columns:1fr 1fr;}
+  .strip-item:nth-child(n+3){display:none;}
+  .section{padding:52px 0;}
+  .section-title h2{font-size:27px;}
+  .quote h2{font-size:30px;}
+  .form-grid{grid-template-columns:1fr;}
+  .facial-slider-container{height:300px;max-width:100%;}
+  .scanner{width:100%;max-width:290px;}
+  .monitor-steps{grid-template-columns:1fr;}
+  .calc-box{padding:22px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- HEADER -->
+<header id="siteHeader">
+<div class="container nav">
+<a href="#inicio" class="logo">
+<img class="logo-mark logo-3d" src="imagens/logo-icon.png" srcset="imagens/logo-icon@2x.png 2x" alt="ALVINTECH" width="60" height="60">
+<defs>
+  <linearGradient id="shEdge" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#6ec9ff"/>
+    <stop offset="50%" stop-color="#0b8fd9"/>
+    <stop offset="100%" stop-color="#053d6b"/>
+  </linearGradient>
+  <linearGradient id="shFace" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#2aa8f0"/>
+    <stop offset="50%" stop-color="#0a7ec8"/>
+    <stop offset="100%" stop-color="#0a4f88"/>
+  </linearGradient>
+  <linearGradient id="shA" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#ffffff"/>
+    <stop offset="45%" stop-color="#c8ecff"/>
+    <stop offset="100%" stop-color="#5ec8ff"/>
+  </linearGradient>
+  <filter id="shDepth" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="2.5" stdDeviation="2" flood-color="#0284c7" flood-opacity=".45"/>
+  </filter>
+</defs>
+<!-- shield outer -->
+<path d="M50 5 L89 20 L89 52 C89 76 71 90 50 97 C29 90 11 76 11 52 L11 20 Z" fill="url(#shEdge)" filter="url(#shDepth)"/>
+<!-- shield face -->
+<path d="M50 11 L83 24 L83 52 C83 72 68 84.5 50 90.5 C32 84.5 17 72 17 52 L17 24 Z" fill="url(#shFace)"/>
+<!-- A left leg -->
+<path d="M50 27 L29 74" stroke="url(#shA)" stroke-width="8" stroke-linecap="round"/>
+<!-- A right leg -->
+<path d="M50 27 L71 74" stroke="url(#shA)" stroke-width="8" stroke-linecap="round"/>
+<!-- A bar -->
+<path d="M37 53 L63 53" stroke="url(#shA)" stroke-width="6.5" stroke-linecap="round"/>
+<!-- circuit from mid-right of A -->
+<path d="M63 53 L74 46 L81 46" stroke="#9fe0ff" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+<path d="M74 46 L74 37" stroke="#9fe0ff" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+<!-- nodes -->
+<circle cx="81" cy="46" r="4.2" fill="#f0f9ff"/>
+<circle cx="81" cy="46" r="2.3" fill="#0ea5ff"/>
+<circle cx="74" cy="37" r="3.6" fill="#f0f9ff"/>
+<circle cx="74" cy="37" r="1.9" fill="#38bdf8"/>
+</svg>
+<div>ALVINTECH<small>SEGURANÇA ELETRÔNICA</small></div>
+</a>
+
+<nav class="menu">
+<a href="#acesso">Controle de Acesso</a>
+<a href="#cftv">CFTV + IA</a>
+<a href="#alarme">Alarme</a>
+<a href="#redes">Redes & Fibra</a>
+<a href="#orcamento">Orçamento</a>
+</nav>
+
+<div class="nav-right">
+<a class="btn-top" href="https://wa.me/5543988460629" target="_blank"><span class="online-dot"></span>WhatsApp</a>
+<button class="burger" id="burgerBtn" aria-label="Abrir menu" aria-expanded="false">☰</button>
+</div>
+</div>
+
+<nav class="mobile-menu" id="mobileMenu">
+<a href="#acesso">Controle de Acesso</a>
+<a href="#cftv">CFTV + IA</a>
+<a href="#alarme">Alarme</a>
+<a href="#redes">Redes & Fibra</a>
+<a href="#planos">Planos</a>
+<a href="#faq">Dúvidas</a>
+<a href="#orcamento">Orçamento</a>
+</nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+<svg class="circuit-bg" viewBox="0 0 1200 560" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+<g stroke="#0ea5ff" stroke-opacity=".16" stroke-width="1.4" fill="none">
+<path d="M0 120 H260 L300 160 H560"/>
+<path d="M0 340 H180 L220 300 H520 L560 340 H900"/>
+<path d="M1200 90 H940 L900 130 H680"/>
+<path d="M1200 420 H960 L920 380 H700 L660 420 H420"/>
+<path d="M760 0 V150 L800 190 V420"/>
+</g>
+<g fill="#38bdf8">
+<circle class="node" cx="560" cy="160" r="3.5"/>
+<circle class="node" cx="900" cy="340" r="3.5" style="animation-delay:.4s"/>
+<circle class="node" cx="680" cy="130" r="3.5" style="animation-delay:.8s"/>
+<circle class="node" cx="420" cy="420" r="3.5" style="animation-delay:1.2s"/>
+<circle class="node" cx="800" cy="190" r="3.5" style="animation-delay:1.6s"/>
+<circle class="node" cx="220" cy="300" r="3.5" style="animation-delay:2s"/>
+</g>
+</svg>
+
+<div class="container hero-grid">
+<div class="reveal visible">
+<div class="tag">SEGURANÇA ELETRÔNICA • REDES • TECNOLOGIA</div>
+<h1>Seu patrimônio protegido.<br><span class="blue">Sua operação mais segura.</span></h1>
+<p class="lead">Controle de acesso facial, CFTV com inteligência artificial, alarmes monitorados, redes e fibra óptica em uma única solução, projetada e instalada pela ALVINTECH.</p>
+<div class="buttons">
+<a href="#orcamento" class="btn primary">SOLICITAR ORÇAMENTO →</a>
+<a href="https://wa.me/5543988460629" target="_blank" class="btn secondary">FALAR COM ESPECIALISTA</a>
+</div>
+<div class="proofs">
+<span><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9"/></svg>Projeto personalizado</span>
+<span><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9"/></svg>Instalação profissional</span>
+<span class="sla"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3" stroke-linecap="round"/></svg>Orçamento em até 24h</span>
+</div>
+
+<div class="hero-stats">
+<div><strong data-count="10" data-suffix="+">0</strong><span>ANOS DE MERCADO</span></div>
+<div><strong data-count="300" data-suffix="+">0</strong><span>PROJETOS ENTREGUES</span></div>
+<div><strong data-count="24" data-suffix="h">0</strong><span>MONITORAMENTO</span></div>
+<div><strong data-count="100" data-suffix="%">0</strong><span>SUPORTE LOCAL</span></div>
+</div>
+</div>
+
+<div class="scanner-wrap reveal visible">
+<div>
+<div class="scanner">
+<div class="scanner-cams"><span></span><span></span></div>
+<div class="scanner-screen" id="scannerScreen">
+<div class="scanner-grid"></div>
+<div class="scanner-ring">
+<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46"/></svg>
+</div>
+<div class="scanner-ring2">
+<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46"/></svg>
+</div>
+<div class="scanner-particles">
+<span style="left:8%;animation-delay:0s;animation-duration:5.2s"></span>
+<span style="left:18%;animation-delay:.6s;animation-duration:4.6s"></span>
+<span style="left:28%;animation-delay:1.2s;animation-duration:5.8s"></span>
+<span style="left:40%;animation-delay:.3s;animation-duration:4.9s"></span>
+<span style="left:52%;animation-delay:1.6s;animation-duration:5.4s"></span>
+<span style="left:63%;animation-delay:.9s;animation-duration:5s"></span>
+<span style="left:74%;animation-delay:2s;animation-duration:4.7s"></span>
+<span style="left:85%;animation-delay:.5s;animation-duration:5.6s"></span>
+<span style="left:93%;animation-delay:1.4s;animation-duration:5.1s"></span>
+<span style="left:47%;animation-delay:2.3s;animation-duration:4.4s"></span>
+</div>
+<svg class="scanner-mesh" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+<g>
+<line x1="50" y1="10" x2="26" y2="24"/><line x1="50" y1="10" x2="74" y2="24"/>
+<line x1="26" y1="24" x2="18" y2="48"/><line x1="74" y1="24" x2="82" y2="48"/>
+<line x1="18" y1="48" x2="22" y2="74"/><line x1="82" y1="48" x2="78" y2="74"/>
+<line x1="22" y1="74" x2="34" y2="97"/><line x1="78" y1="74" x2="66" y2="97"/>
+<line x1="34" y1="97" x2="50" y2="110"/><line x1="66" y1="97" x2="50" y2="110"/>
+<line x1="26" y1="24" x2="38" y2="42"/><line x1="74" y1="24" x2="62" y2="42"/>
+<line x1="38" y1="42" x2="50" y2="44"/><line x1="62" y1="42" x2="50" y2="44"/>
+<line x1="50" y1="44" x2="50" y2="60"/>
+<line x1="18" y1="48" x2="38" y2="42"/><line x1="82" y1="48" x2="62" y2="42"/>
+<line x1="38" y1="42" x2="41" y2="80"/><line x1="62" y1="42" x2="59" y2="80"/>
+<line x1="41" y1="80" x2="50" y2="84"/><line x1="59" y1="80" x2="50" y2="84"/>
+<line x1="50" y1="60" x2="50" y2="84"/>
+<line x1="22" y1="74" x2="41" y2="80"/><line x1="78" y1="74" x2="59" y2="80"/>
+</g>
+<g>
+<circle cx="50" cy="10" r="1" style="animation-delay:0s"/>
+<circle cx="26" cy="24" r="1" style="animation-delay:.05s"/><circle cx="74" cy="24" r="1" style="animation-delay:.05s"/>
+<circle cx="18" cy="48" r="1" style="animation-delay:.15s"/><circle cx="82" cy="48" r="1" style="animation-delay:.15s"/>
+<circle cx="38" cy="42" r="1" style="animation-delay:.2s"/><circle cx="62" cy="42" r="1" style="animation-delay:.2s"/>
+<circle cx="50" cy="44" r="1" style="animation-delay:.25s"/>
+<circle cx="22" cy="74" r="1" style="animation-delay:.3s"/><circle cx="78" cy="74" r="1" style="animation-delay:.3s"/>
+<circle cx="50" cy="60" r="1" style="animation-delay:.35s"/>
+<circle cx="34" cy="97" r="1" style="animation-delay:.45s"/><circle cx="66" cy="97" r="1" style="animation-delay:.45s"/>
+<circle cx="41" cy="80" r="1" style="animation-delay:.4s"/><circle cx="59" cy="80" r="1" style="animation-delay:.4s"/>
+<circle cx="50" cy="84" r="1" style="animation-delay:.5s"/>
+<circle cx="50" cy="110" r="1" style="animation-delay:.55s"/>
+</g>
+</svg>
+<div class="scanner-face-wrap">
+<img src="imagens/rosto-3d-biometrico.png" alt="Rosto sendo verificado pelo sistema de reconhecimento facial ALVINTECH" loading="lazy">
+</div>
+<div class="scanner-scanline"></div>
+<div class="scanner-logo">
+<img class="logo-3d" src="imagens/logo-icon.png" srcset="imagens/logo-icon@2x.png 2x" alt="ALVINTECH" width="112" height="112">
+<defs>
+  <linearGradient id="scEdge" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#6ec9ff"/>
+    <stop offset="50%" stop-color="#0b8fd9"/>
+    <stop offset="100%" stop-color="#053d6b"/>
+  </linearGradient>
+  <linearGradient id="scFace" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#2aa8f0"/>
+    <stop offset="50%" stop-color="#0a7ec8"/>
+    <stop offset="100%" stop-color="#0a4f88"/>
+  </linearGradient>
+  <linearGradient id="scA" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#ffffff"/>
+    <stop offset="45%" stop-color="#c8ecff"/>
+    <stop offset="100%" stop-color="#5ec8ff"/>
+  </linearGradient>
+</defs>
+<path d="M50 5 L89 20 L89 52 C89 76 71 90 50 97 C29 90 11 76 11 52 L11 20 Z" fill="url(#scEdge)"/>
+<path d="M50 11 L83 24 L83 52 C83 72 68 84.5 50 90.5 C32 84.5 17 72 17 52 L17 24 Z" fill="url(#scFace)"/>
+<path d="M50 27 L29 74" stroke="url(#scA)" stroke-width="8" stroke-linecap="round"/>
+<path d="M50 27 L71 74" stroke="url(#scA)" stroke-width="8" stroke-linecap="round"/>
+<path d="M37 53 L63 53" stroke="url(#scA)" stroke-width="6.5" stroke-linecap="round"/>
+<path d="M63 53 L74 46 L81 46" stroke="#9fe0ff" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+<path d="M74 46 L74 37" stroke="#9fe0ff" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+<circle cx="81" cy="46" r="4.2" fill="#f0f9ff"/>
+<circle cx="81" cy="46" r="2.3" fill="#0ea5ff"/>
+<circle cx="74" cy="37" r="3.6" fill="#f0f9ff"/>
+<circle cx="74" cy="37" r="1.9" fill="#38bdf8"/>
+</svg>
+<div class="lg-word">ALVIN<span>TECH</span></div>
+<div class="lg-slogan">Segurança Eletrônica &amp; Redes</div>
+</div>
+<div class="scanner-status"><span class="dot"></span><span id="scanStatusText">ANALISANDO ACESSO</span></div>
+<div class="scanner-clock"><div id="liveClock">--:--:--</div><div id="liveDate">----/--/--</div></div>
+</div>
+<div class="scanner-led"></div>
+</div>
+<div class="scanner-caption">CONTROLE DE ACESSO FACIAL · ALVINTECH</div>
+</div>
+</div>
+</div>
+
+<a href="#acesso" class="scroll-cue" aria-label="Rolar para conhecer as soluções">
+<span>CONHEÇA</span>
+<svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a>
+</section>
+
+<!-- MENU DE SERVIÇOS -->
+<div class="strip">
+<div class="container strip-grid">
+<a href="#acesso" class="strip-item"><span class="num"><i></i>01</span>Controle de acesso</a>
+<a href="#cftv" class="strip-item"><span class="num"><i></i>02</span>CFTV + IA</a>
+<a href="#alarme" class="strip-item"><span class="num"><i></i>03</span>Alarme monitorado</a>
+<a href="#redes" class="strip-item"><span class="num"><i></i>04</span>Redes & Fibra</a>
+<a href="#solucoes" class="strip-item"><span class="num"><i></i>05</span>Proteção perimetral</a>
+</div>
+</div>
+
+<!-- FAIXA DE MARCAS -->
+<div class="brands">
+<div class="container">
+<div class="brands-label">EQUIPAMENTOS E MARCAS QUE TRABALHAMOS</div>
+<div class="marquee">
+<div class="marquee-track">
+<span>HIKVISION</span><span>INTELBRAS</span><span>DAHUA</span><span>TP-LINK</span><span>PPA</span><span>FURUKAWA</span>
+<span>HIKVISION</span><span>INTELBRAS</span><span>DAHUA</span><span>TP-LINK</span><span>PPA</span><span>FURUKAWA</span>
+</div>
+</div>
+</div>
+</div>
+
+<!-- CONTROLE DE ACESSO -->
+<section class="section access" id="acesso">
+<div class="access-tech-nodes" aria-hidden="true">
+<span></span><span></span><span></span><span></span>
+<span></span><span></span><span></span><span></span>
+<div class="access-scanline"></div>
+</div>
+<div class="container access-grid">
+<div class="reveal">
+<div class="tag">CONTROLE DE ACESSO INTELIGENTE</div>
+<h2 style="font-size:38px;margin:10px 0;line-height:1.05">Controle quem entra.<br><span class="blue">Tenha tudo sob controle.</span></h2>
+<p style="color:#66798b;font-size:13.5px;max-width:480px">Modernize sua portaria com tecnologia, segurança e rastreabilidade de cada acesso.</p>
+<div class="access-list">
+<div>Reconhecimento facial</div>
+<div>Biometria e cartão</div>
+<div>TAG para veículos</div>
+<div>QR Code para visitantes</div>
+<div>Portões e cancelas</div>
+<div>Integração com CFTV</div>
+</div>
+<div class="buttons">
+<a href="#orcamento" class="btn primary">QUERO ESSA SOLUÇÃO →</a>
+</div>
+</div>
+
+<div class="reveal">
+<div class="access-visual">
+<!-- Celular: registro de entrada e saída -->
+<div class="phone-mock" aria-label="App de controle de acesso">
+<div class="phone-screen">
+<div class="phone-status">
+<span id="phoneTime">09:41</span>
+<span>●●●● Wi‑Fi</span>
+</div>
+<div class="phone-app-bar">
+<div class="app-name">ALVINTECH Acesso</div>
+<div class="app-sub">Portaria · Condomínio</div>
+<div class="phone-live"><i></i>REGISTROS AO VIVO</div>
+</div>
+<div class="phone-logs" id="phoneLogs"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- CALCULADORA DE CÂMERAS -->
+<section class="section calc" id="calculadora">
+<div class="calc-tech-nodes" aria-hidden="true">
+<span></span><span></span><span></span><span></span>
+<span></span><span></span><span></span><span></span>
+<div class="calc-scan"></div>
+</div>
+<div class="container">
+<div class="section-title reveal">
+<div>
+<div class="tag">FERRAMENTA RÁPIDA</div>
+<h2>Quantas câmeras<br><span class="blue">o seu espaço precisa?</span></h2>
+</div>
+<p>Uma estimativa inicial gratuita. Nossa equipe confirma o projeto ideal com uma visita técnica.</p>
+</div>
+
+<div class="calc-box reveal">
+<div class="calc-form">
+<div class="calc-field">
+<label>TIPO DE LOCAL</label>
+<select id="calcTipo">
+<option value="residencial">Residência</option>
+<option value="comercial">Comércio / Empresa</option>
+<option value="condominio">Condomínio</option>
+</select>
+</div>
+<div class="calc-field">
+<label>NÚMERO DE AMBIENTES / PONTOS A COBRIR</label>
+<input type="number" id="calcAmbientes" min="1" max="60" value="4">
+</div>
+<div class="calc-field">
+<label>POSSUI PORTÃO / GARAGEM?</label>
+<select id="calcPortao">
+<option value="nao">Não</option>
+<option value="sim">Sim</option>
+</select>
+</div>
+<button type="button" class="btn primary" onclick="calcularCameras()" style="justify-content:center;margin-top:4px;">CALCULAR ESTIMATIVA →</button>
+</div>
+
+<div class="calc-result" id="calcResult">
+<div class="calc-fx" aria-hidden="true">
+<div class="fx-grid"></div>
+<div class="fx-radar"></div>
+<div class="fx-scan"></div>
+<div class="fx-cam c1"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 012-2h4l2-2h2l2 2h4a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/><circle cx="12" cy="13" r="3"/></svg></div>
+<div class="fx-cam c2"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 012-2h4l2-2h2l2 2h4a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/><circle cx="12" cy="13" r="3"/></svg></div>
+<div class="fx-cam c3"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 012-2h4l2-2h2l2 2h4a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/><circle cx="12" cy="13" r="3"/></svg></div>
+<div class="fx-cam c4"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 012-2h4l2-2h2l2 2h4a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/><circle cx="12" cy="13" r="3"/></svg></div>
+</div>
+<div class="calc-result-body" id="calcResultBody">
+<p class="calc-empty">Preencha os dados ao lado para ver uma estimativa de câmeras e pontos de acesso recomendados.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- CFTV -->
+<section class="section section-dark" id="cftv">
+<div class="container">
+<div class="section-title reveal">
+<div>
+<div class="tag">CFTV + INTELIGÊNCIA ARTIFICIAL</div>
+<h2>Câmeras que ajudam você<br><span class="blue">a enxergar o que importa.</span></h2>
+</div>
+<p>Mais que gravação: análise inteligente, detecção de pessoas e veículos, reconhecimento facial e acesso remoto.</p>
+</div>
+
+<div class="cards">
+<div class="card dark-card reveal">
+<div class="detect-frame"><span></span><span></span><span></span><span></span></div>
+<div class="icon"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 012-2h4l2-2h2l2 2h4a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/><circle cx="12" cy="13" r="3.5"/></svg></div>
+<h3>Detecção por IA</h3>
+<p>Identificação inteligente de pessoas, veículos e eventos em tempo real.</p>
+<ul><li>Detecção inteligente</li><li>Busca por eventos</li><li>Alertas automáticos</li></ul>
+</div>
+
+<div class="card dark-card reveal">
+<div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></svg></div>
+<h3>Reconhecimento facial</h3>
+<p>Integração entre câmeras e controle de acesso para uma portaria automática.</p>
+<ul><li>Identificação</li><li>Busca facial</li><li>Controle integrado</li></ul>
+</div>
+
+<div class="card dark-card reveal">
+<div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="14" height="10" rx="2"/><path d="M17 9l4-2.5v7L17 11"/></svg></div>
+<h3>Monitoramento remoto</h3>
+<p>Visualização pelo celular, computador ou central de operação, de onde você estiver.</p>
+<ul><li>Acesso remoto</li><li>Gravação em nuvem</li><li>Notificações</li></ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- COMO FUNCIONA A CENTRAL -->
+<section class="section monitor" id="central">
+<div class="container">
+<div class="section-title reveal">
+<div>
+<div class="tag">COMO FUNCIONA</div>
+<h2>Do sensor ao seu celular,<br><span class="blue">em quatro etapas.</span></h2>
+</div>
+<p>Um fluxo simples por trás de cada câmera, sensor e ponto de acesso instalado pela ALVINTECH.</p>
+</div>
+
+<div class="monitor-steps">
+<div class="monitor-step reveal">
+<div class="num-badge">01</div>
+<h4>Captação</h4>
+<p>Câmeras, sensores e leitores registram o que acontece no local em tempo real.</p>
+</div>
+<div class="monitor-step reveal">
+<div class="num-badge">02</div>
+<h4>Análise</h4>
+<p>Inteligência artificial reconhece pessoas, veículos e eventos relevantes.</p>
+</div>
+<div class="monitor-step reveal">
+<div class="num-badge">03</div>
+<h4>Alerta</h4>
+<p>Notificações chegam até você e, quando contratado, até a central de monitoramento.</p>
+</div>
+<div class="monitor-step reveal">
+<div class="num-badge">04</div>
+<h4>Resposta</h4>
+<p>Você acompanha e decide pelo app, ou nossa equipe técnica é acionada.</p>
+</div>
+</div>
+
+<div class="monitor-badges reveal">
+<div class="monitor-badge"><strong>24/7</strong><span>SISTEMA ATIVO</span></div>
+<div class="monitor-badge"><strong data-count="99" data-suffix=".9%">0</strong><span>DISPONIBILIDADE</span></div>
+<div class="monitor-badge"><strong>100%</strong><span>ACESSO REMOTO VIA APP</span></div>
+</div>
+</div>
+</section>
+
+<!-- ALARME -->
+<section class="section alarm" id="alarme">
+<div class="container">
+<div class="section-title reveal">
+<div>
+<div class="tag">PROTEÇÃO 24 HORAS</div>
+<h2>Alarme monitorado:<br><span class="blue">segurança quando você precisa.</span></h2>
+</div>
+<p>Uma camada adicional de proteção para empresas, condomínios e áreas críticas.</p>
+</div>
+
+<div class="offer-grid">
+<div class="offer reveal">
+<div class="beacon-icon"><svg viewBox="0 0 24 24"><path d="M12 3a5 5 0 015 5v4l2 4H5l2-4V8a5 5 0 015-5z"/><path d="M9.5 20a2.5 2.5 0 005 0"/></svg></div>
+<div class="tag">ALARME MONITORADO</div>
+<h3>Monitoramento 24h</h3>
+<p>Sensores, central de alarme e monitoramento contínuo para acompanhar eventos e aumentar a proteção do seu patrimônio.</p>
+<a href="#orcamento" class="btn primary">SOLICITAR PROPOSTA →</a>
+</div>
+
+<div class="offer offer-green reveal">
+<div class="beacon-icon"><svg viewBox="0 0 24 24"><path d="M4 12h16M4 12l3-3M4 12l3 3M20 12l-3-3M20 12l-3 3"/></svg></div>
+<div class="tag">PROTEÇÃO PERIMETRAL</div>
+<h3>Cerca elétrica + alarme</h3>
+<p>Integração entre cerca elétrica, sensores, alarme e CFTV para uma proteção completa do perímetro.</p>
+<a href="#orcamento" class="btn secondary">FALAR COM A ALVINTECH →</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- REDES -->
+<section class="section network" id="redes">
+<div class="container network-grid">
+<div class="reveal">
+<div class="tag">REDES • FIBRA • CERTIFICAÇÃO</div>
+<h2 style="font-size:38px;line-height:1.05;margin:10px 0">Infraestrutura que<br><span class="blue">sustenta sua segurança.</span></h2>
+<p style="font-size:13.5px;color:#687b8e;max-width:480px">Uma rede bem projetada é fundamental para CFTV, controle de acesso, servidores e sistemas críticos.</p>
+<div class="network-list">
+<div>Fibra óptica</div>
+<div>Fusão e organização de fibras</div>
+<div>Cabeamento Cat5e, Cat6 e Cat6A</div>
+<div>Certificação de cabeamento</div>
+<div>Racks e switches PoE</div>
+<div>Wi-Fi corporativo</div>
+<div>Links e infraestrutura de rede</div>
+</div>
+</div>
+
+<div class="network-box reveal">
+<svg class="mesh" viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg">
+<g stroke="#0ea5ff" stroke-opacity=".35" fill="none">
+<path d="M40 40 L150 90 L260 50"/>
+<path d="M40 40 L60 180"/>
+<path d="M150 90 L60 180 L200 210 L260 50"/>
+<path d="M200 210 L260 160"/>
+</g>
+<g fill="#38bdf8">
+<circle cx="40" cy="40" r="4"/><circle cx="150" cy="90" r="4" style="animation-delay:.3s"/>
+<circle cx="260" cy="50" r="4" style="animation-delay:.6s"/><circle cx="60" cy="180" r="4" style="animation-delay:.9s"/>
+<circle cx="200" cy="210" r="4" style="animation-delay:1.2s"/><circle cx="260" cy="160" r="4" style="animation-delay:1.5s"/>
+</g>
+</svg>
+<div class="tag">ALVINTECH INFRAESTRUTURA</div>
+<h3>REDES<br><span>CONECTADAS.</span></h3>
+<div class="demo-download">
+<div class="dl-bar-wrap"><div class="dl-bar"></div></div>
+<div class="dl-stats">
+<div><strong id="dlSpeed">847</strong> <small>Mbps ↓</small></div>
+<div><strong id="upSpeed">312</strong> <small>Mbps ↑</small></div>
+</div>
+<div class="dl-mb">
+<span>Download</span>
+<span>Upload</span>
+<span>Fibra óptica</span>
+</div>
+</div>
+<div class="netcheck">
+<div>Fibra óptica</div>
+<div>Certificação</div>
+<div>PoE</div>
+<div>Racks</div>
+<div>Wi-Fi corporativo</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- OUTROS SERVIÇOS -->
+<section class="section section-dark" id="solucoes">
+<div class="container">
+<div class="section-title reveal">
+<div>
+<div class="tag">SOLUÇÕES COMPLETAS</div>
+<h2>Tudo integrado.<br>Tudo mais seguro.</h2>
+</div>
+<p>Do perímetro ao servidor, a ALVINTECH cuida da infraestrutura e da segurança.</p>
+</div>
+
+<div class="services">
+<div class="service reveal"><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 3a5 5 0 015 5v4l2 4H5l2-4V8a5 5 0 015-5z"/><path d="M9.5 20a2.5 2.5 0 005 0"/></svg></div><h3>Alarmes</h3><p>Alarmes convencionais, monitorados e sensores.</p></div>
+<div class="service reveal"><div class="icon"><svg viewBox="0 0 24 24"><path d="M4 12h16M4 12l3-3M4 12l3 3M20 12l-3-3M20 12l-3 3"/></svg></div><h3>Cercas elétricas</h3><p>Proteção perimetral e integração.</p></div>
+<div class="service reveal"><div class="icon"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="4"/><path d="M8 10V7M16 10V7M6 14v3M18 14v3"/></svg></div><h3>Portões e cancelas</h3><p>Automação e controle de veículos.</p></div>
+<div class="service reveal"><div class="icon"><svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="2"/><circle cx="12" cy="17" r="1"/></svg></div><h3>Interfonia</h3><p>Comunicação e integração de portaria.</p></div>
+<div class="service reveal"><div class="icon"><svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M10 8h4M9 12h6M9 16h6"/></svg></div><h3>Nobreaks</h3><p>Energia protegida para equipamentos.</p></div>
+<div class="service reveal"><div class="icon"><svg viewBox="0 0 24 24"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21v-7h6v7"/></svg></div><h3>Portaria remota</h3><p>Integração e operação remota.</p></div>
+<div class="service reveal"><div class="icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 00-5.7 5.7L4 17v3h3l5-5a4 4 0 005.7-5.7z"/></svg></div><h3>Manutenção</h3><p>Preventiva e corretiva.</p></div>
+<div class="service reveal"><div class="icon"><svg viewBox="0 0 24 24"><path d="M2 8.5a16 16 0 0120 0M5.5 12a11 11 0 0113 0M9 15.5a6 6 0 016 0"/><circle cx="12" cy="19" r="1.2"/></svg></div><h3>Wi-Fi / Redes</h3><p>Projetos de conectividade.</p></div>
+</div>
+</div>
+</section>
+
+<!-- PLANOS -->
+<section class="section plans" id="planos">
+<div class="container">
+<div class="section-title reveal">
+<div>
+<div class="tag">SOLUÇÕES SOB MEDIDA</div>
+<h2>Um plano para<br><span class="blue">cada tipo de projeto.</span></h2>
+</div>
+<p>Cada pacote é ajustado durante a visita técnica. Os itens abaixo mostram o ponto de partida de cada perfil.</p>
+</div>
+
+<div class="plans-grid">
+<div class="plan reveal">
+<h3>Residencial</h3>
+<div class="plan-price">Orçamento personalizado</div>
+<ul>
+<li>Câmeras internas e externas</li>
+<li>Controle de acesso facial ou biometria</li>
+<li>Alarme com sensores de abertura</li>
+<li>Acesso remoto pelo celular</li>
+</ul>
+<button type="button" class="btn secondary" onclick="selecionarPlano('Residencial')" style="justify-content:center;">SOLICITAR ESTE PLANO</button>
+</div>
+
+<div class="plan featured reveal">
+<h3>Comercial</h3>
+<div class="plan-price">Orçamento personalizado</div>
+<ul>
+<li>CFTV com detecção por IA</li>
+<li>Controle de acesso para colaboradores</li>
+<li>Alarme monitorado 24h</li>
+<li>Rede estruturada e Wi-Fi corporativo</li>
+<li>Suporte técnico prioritário</li>
+</ul>
+<button type="button" class="btn primary" onclick="selecionarPlano('Comercial')" style="justify-content:center;">SOLICITAR ESTE PLANO</button>
+</div>
+
+<div class="plan reveal">
+<h3>Condomínios</h3>
+<div class="plan-price">Orçamento personalizado</div>
+<ul>
+<li>Portaria remota integrada</li>
+<li>Controle de acesso para moradores e visitantes</li>
+<li>CFTV nas áreas comuns e perímetro</li>
+<li>Cerca elétrica e alarme perimetral</li>
+<li>Interfonia e automação de portões</li>
+</ul>
+<button type="button" class="btn secondary" onclick="selecionarPlano('Condomínio')" style="justify-content:center;">SOLICITAR ESTE PLANO</button>
+</div>
+</div>
+</div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="section testi" id="depoimentos">
+<div class="container">
+<div class="section-title reveal">
+<div>
+<div class="tag">QUEM CONFIA NA ALVINTECH</div>
+<h2>Avaliações de<br><span class="blue" style="color:var(--blue)">quem já instalou.</span></h2>
+</div>
+<p>Veja o que dizem os clientes que já contam com a proteção e a infraestrutura da ALVINTECH.</p>
+</div>
+
+<div class="testi-grid">
+<div class="testi-card reveal">
+<div class="testi-stars">
+<svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 15l-5.6 3 1.4-6.2L1 8.5l6.4-.6z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 15l-5.6 3 1.4-6.2L1 8.5l6.4-.6z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 15l-5.6 3 1.4-6.2L1 8.5l6.4-.6z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 15l-5.6 3 1.4-6.2L1 8.5l6.4-.6z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 15l-5.6 3 1.4-6.2L1 8.5l6.4-.6z"/></svg>
+</div>
+<p>"Somos clientes há 3 anos e a ALVINTECH é, sem dúvida, a melhor da região na parte de segurança eletrônica. Recomendamos com total confiança!"</p>
+<div class="testi-who">
+<div class="testi-avatar">MM</div>
+<div><strong>Edifício Maison Murano</strong><span>Condomínio Residencial</span></div>
+</div>
+</div>
+
+<div class="testi-card reveal">
+<div class="testi-stars">
+<svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 15l-5.6 3 1.4-6.2L1 8.5l6.4-.6z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 15l-5.6 3 1.4-6.2L1 8.5l6.4-.6z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 15l-5.6 3 1.4-6.2L1 8.5l6.4-.6z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 15l-5.6 3 1.4-6.2L1 8.5l6.4-.6z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 15l-5.6 3 1.4-6.2L1 8.5l6.4-.6z"/></svg>
+</div>
+<p>"A melhor referência em Londrina quando se trata de controle de acesso e redes. Um trabalho técnico de altíssimo nível."</p>
+<div class="testi-who">
+<div class="testi-avatar">EM</div>
+<div><strong>Edifício Manacá</strong><span>Condomínio Residencial</span></div>
+</div>
+</div>
+
+<div class="testi-card reveal">
+<div class="testi-stars">
+<svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 15l-5.6 3 1.4-6.2L1 8.5l6.4-.6z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 15l-5.6 3 1.4-6.2L1 8.5l6.4-.6z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 15l-5.6 3 1.4-6.2L1 8.5l6.4-.6z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 15l-5.6 3 1.4-6.2L1 8.5l6.4-.6z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 15l-5.6 3 1.4-6.2L1 8.5l6.4-.6z"/></svg>
+</div>
+<p>"Serviço impecável! Recomendo fortemente o trabalho e o suporte na parte de telefonia e estruturação de redes."</p>
+<div class="testi-who">
+<div class="testi-avatar">CA</div>
+<div><strong>Clínica And Ayes</strong><span>Empresa / Clínica</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- GALERIA ANTES/DEPOIS (OCULTADA) -->
+<!--
+<section class="section gallery" id="projetos">
+<div class="container">
+<div class="section-title reveal">
+<div>
+<div class="tag">PROJETOS REALIZADOS</div>
+<h2>Antes e depois<br><span class="blue">de instalações reais.</span></h2>
+</div>
+<p>Espaços reservados para as fotos dos seus projetos — troque pelos arquivos em <code>imagens/</code>.</p>
+</div>
+
+<div class="gallery-grid">
+<div class="gal-pair reveal">
+<div class="gal-imgs">
+<div class="gal-img fallback" data-label="ANTES"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M4 5h16v14H4z"/><path d="M4 15l4-4 3 3 5-6 4 5"/></svg></div>
+<div class="gal-img fallback" data-label="DEPOIS"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M4 5h16v14H4z"/><path d="M4 15l4-4 3 3 5-6 4 5"/></svg></div>
+</div>
+<div class="gal-caption">Portaria com controle de acesso facial</div>
+</div>
+
+<div class="gal-pair reveal">
+<div class="gal-imgs">
+<div class="gal-img fallback" data-label="ANTES"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M4 5h16v14H4z"/><path d="M4 15l4-4 3 3 5-6 4 5"/></svg></div>
+<div class="gal-img fallback" data-label="DEPOIS"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M4 5h16v14H4z"/><path d="M4 15l4-4 3 3 5-6 4 5"/></svg></div>
+</div>
+<div class="gal-caption">Rack de rede organizado e certificado</div>
+</div>
+
+<div class="gal-pair reveal">
+<div class="gal-imgs">
+<div class="gal-img fallback" data-label="ANTES"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M4 5h16v14H4z"/><path d="M4 15l4-4 3 3 5-6 4 5"/></svg></div>
+<div class="gal-img fallback" data-label="DEPOIS"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M4 5h16v14H4z"/><path d="M4 15l4-4 3 3 5-6 4 5"/></svg></div>
+</div>
+<div class="gal-caption">CFTV perimetral com cerca elétrica</div>
+</div>
+</div>
+</div>
+</section>
+-->
+
+<!-- FAQ -->
+<section class="section faq-sec" id="faq">
+<div class="container">
+<div class="section-title reveal" style="justify-content:center;text-align:center;display:block;">
+<div class="tag" style="justify-content:center;">DÚVIDAS FREQUENTES</div>
+<h2 style="margin-top:10px;">Perguntas que <span class="blue">recebemos bastante.</span></h2>
+</div>
+
+<div class="faq-list reveal">
+<details class="faq-item">
+<summary>Quanto tempo leva a instalação?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+<div class="faq-a">O prazo depende do porte do projeto. Após a visita técnica, passamos um cronograma antes de iniciar o serviço.</div>
+</details>
+<details class="faq-item">
+<summary>Vocês atendem apartamentos, casas e condomínios?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+<div class="faq-a">Sim. Atendemos residências, empresas e condomínios, com projetos adaptados a cada tipo de espaço.</div>
+</details>
+<details class="faq-item">
+<summary>O sistema funciona se a internet cair?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+<div class="faq-a">Câmeras e alarmes continuam gravando e funcionando localmente; o acesso remoto pelo app volta assim que a conexão retorna. Avaliamos redundância de internet em projetos críticos.</div>
+</details>
+<details class="faq-item">
+<summary>Consigo ver as câmeras e o controle de acesso pelo celular?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+<div class="faq-a">Sim, os sistemas que instalamos têm aplicativo próprio para acompanhamento remoto, com notificações de eventos.</div>
+</details>
+<details class="faq-item">
+<summary>Como funciona o suporte após a instalação?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+<div class="faq-a">Oferecemos suporte técnico e manutenção preventiva e corretiva. Fale com a gente pelo WhatsApp para prazos e condições do seu contrato.</div>
+</details>
+<details class="faq-item">
+<summary>Vocês fazem visita técnica para orçamento?<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+<div class="faq-a">Sim. Para projetos maiores, agendamos uma visita para entender o espaço e fechar um orçamento preciso, sem custo de avaliação.</div>
+</details>
+</div>
+</div>
+</section>
+
+<!-- ORÇAMENTO -->
+<section class="section quote" id="orcamento">
+<div class="container quote-grid">
+<div class="reveal">
+<div class="tag">FALE COM UM ESPECIALISTA</div>
+<h2>Vamos transformar<br><span class="blue">segurança em resultado.</span></h2>
+<p class="quote-text">Conte o que você precisa. Nossa equipe avalia o projeto e indica a solução mais adequada.</p>
+<div class="contact-info">
+<div><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.7A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.5 2.1L8 9.7a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.9.3 1.8.5 2.7.6a2 2 0 011.7 2z"/></svg><strong>(43) 98846-0629</strong></div>
+<div><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M4 6l8 7 8-7"/></svg><strong>suporte@alvintech.com.br</strong></div>
+</div>
+<div class="buttons" style="margin-top:16px;">
+<a href="https://wa.me/5543988460629" target="_blank" class="btn primary">WHATSAPP</a>
+<a href="mailto:suporte@alvintech.com.br" class="btn secondary">ENVIAR E-MAIL</a>
+</div>
+</div>
+
+<form class="form reveal" id="orcamentoForm">
+<h3>Solicite seu orçamento</h3>
+<div class="form-grid">
+<div class="field">
+<label>NOME *</label>
+<input id="nome" required placeholder="Seu nome">
+</div>
+
+<div class="field">
+<label>EMPRESA / CONDOMÍNIO</label>
+<input id="empresa" placeholder="Nome">
+</div>
+
+<div class="field">
+<label>WHATSAPP *</label>
+<input id="telefone" required placeholder="(43) 99999-9999">
+</div>
+
+<div class="field">
+<label>E-MAIL</label>
+<input id="email" type="email" placeholder="seu@email.com">
+</div>
+
+<div class="field full">
+<label>SOLUÇÃO</label>
+<select id="servico">
+<option>Controle de acesso</option>
+<option>CFTV com IA</option>
+<option>Alarme monitorado 24h</option>
+<option>Redes / Wi-Fi</option>
+<option>Fibra óptica</option>
+<option>Certificação de cabeamento</option>
+<option>Cerca elétrica</option>
+<option>Portões / cancelas</option>
+<option>Projeto completo de segurança</option>
+<option>Manutenção</option>
+</select>
+</div>
+
+<div class="field full">
+<label>DETALHES DO PROJETO</label>
+<textarea id="mensagem" placeholder="Conte rapidamente o que você precisa..."></textarea>
+</div>
+
+<div class="field full">
+<button type="submit" class="btn primary">ENVIAR SOLICITAÇÃO PELO WHATSAPP →</button>
+</div>
+</div>
+<div class="form-note"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>Seus dados são usados apenas para retorno do orçamento.</div>
+</form>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="container">
+<div class="footer-grid">
+<div>
+<div class="logo">
+<img class="logo-mark logo-3d" src="imagens/logo-icon.png" alt="ALVINTECH" width="40" height="40">
+<defs>
+  <linearGradient id="fshEdge" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#6ec9ff"/>
+    <stop offset="50%" stop-color="#0b8fd9"/>
+    <stop offset="100%" stop-color="#053d6b"/>
+  </linearGradient>
+  <linearGradient id="fshFace" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#2aa8f0"/>
+    <stop offset="50%" stop-color="#0a7ec8"/>
+    <stop offset="100%" stop-color="#0a4f88"/>
+  </linearGradient>
+  <linearGradient id="fshA" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#ffffff"/>
+    <stop offset="45%" stop-color="#c8ecff"/>
+    <stop offset="100%" stop-color="#5ec8ff"/>
+  </linearGradient>
+  <filter id="fshDepth" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="2.5" stdDeviation="2" flood-color="#0284c7" flood-opacity=".45"/>
+  </filter>
+</defs>
+<!-- shield outer -->
+<path d="M50 5 L89 20 L89 52 C89 76 71 90 50 97 C29 90 11 76 11 52 L11 20 Z" fill="url(#fshEdge)" filter="url(#fshDepth)"/>
+<!-- shield face -->
+<path d="M50 11 L83 24 L83 52 C83 72 68 84.5 50 90.5 C32 84.5 17 72 17 52 L17 24 Z" fill="url(#fshFace)"/>
+<!-- A left leg -->
+<path d="M50 27 L29 74" stroke="url(#fshA)" stroke-width="8" stroke-linecap="round"/>
+<!-- A right leg -->
+<path d="M50 27 L71 74" stroke="url(#fshA)" stroke-width="8" stroke-linecap="round"/>
+<!-- A bar -->
+<path d="M37 53 L63 53" stroke="url(#fshA)" stroke-width="6.5" stroke-linecap="round"/>
+<!-- circuit from mid-right of A -->
+<path d="M63 53 L74 46 L81 46" stroke="#9fe0ff" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+<path d="M74 46 L74 37" stroke="#9fe0ff" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+<!-- nodes -->
+<circle cx="81" cy="46" r="4.2" fill="#f0f9ff"/>
+<circle cx="81" cy="46" r="2.3" fill="#0ea5ff"/>
+<circle cx="74" cy="37" r="3.6" fill="#f0f9ff"/>
+<circle cx="74" cy="37" r="1.9" fill="#38bdf8"/>
+</svg>
+<div>ALVINTECH<small>SEGURANÇA</small></div>
+</div>
+<p>Especialistas em câmeras, controle de acesso, redes e confiança.</p>
+</div>
+
+<div>
+<h4>SEGURANÇA</h4>
+<ul>
+<li><a href="#cftv">CFTV + IA</a></li>
+<li><a href="#acesso">Controle de acesso</a></li>
+<li><a href="#alarme">Alarmes monitorados</a></li>
+<li><a href="#alarme">Cercas elétricas</a></li>
+</ul>
+</div>
+
+<div>
+<h4>EMPRESA</h4>
+<ul>
+<li><a href="#planos">Planos</a></li>
+<li><a href="#depoimentos">Depoimentos</a></li>
+<li><a href="#faq">Dúvidas frequentes</a></li>
+</ul>
+</div>
+
+<div>
+<h4>CONTATO</h4>
+<ul>
+<li>(43) 98846-0629</li>
+<li>suporte@alvintech.com.br</li>
+<li>Londrina – PR</li>
+</ul>
+</div>
+</div>
+
+<div class="copy">
+<div>© 2026 ALVINTECH Segurança</div>
+<div>Segurança • Redes • Tecnologia</div>
+</div>
+</div>
+</footer>
+
+<!-- BOTÕES FLUTUANTES -->
+<div class="floating-buttons">
+<div class="chat-teaser" id="chatTeaser">
+<button type="button" onclick="fecharTeaser()" aria-label="Fechar">✕</button>
+<span id="teaserText"></span><span class="typing-cursor"></span>
+</div>
+<a href="https://www.instagram.com/alvintech.seg/" target="_blank" class="float-btn float-ig" title="Siga no Instagram">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.256 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.25a3.25 3.25 0 1 1 0-6.5 3.25 3.25 0 0 1 0 6.5zm5.4-8.65a1.15 1.15 0 1 1-2.3 0 1.15 1.15 0 0 1 2.3 0z" fill="white"/>
+</svg>
+</a>
+<a href="https://wa.me/5543988460629" target="_blank" class="float-btn float-wa" title="Fale no WhatsApp">
+<span class="online-dot"></span>
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.71.45 3.38 1.3 4.85L2.05 22l5.36-1.4a9.9 9.9 0 0 0 4.63 1.18h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.847 9.847 0 0 0 12.04 2zm0 18.1h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.18.83.85-3.1-.2-.32a8.19 8.19 0 0 1-1.26-4.37c0-4.53 3.68-8.21 8.2-8.21 2.19 0 4.25.86 5.8 2.4a8.15 8.15 0 0 1 2.4 5.81c0 4.53-3.69 8.29-8.11 8.29zm4.49-6.13c-.25-.12-1.45-.72-1.68-.8-.22-.08-.39-.12-.55.13-.16.24-.63.79-.77.95-.14.16-.28.18-.53.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.7-.14-.25-.01-.39.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.13-.55-1.32-.75-1.81-.2-.48-.4-.41-.55-.42-.14-.01-.3-.01-.47-.01a.9.9 0 0 0-.65.3c-.22.24-.85.83-.85 2.03 0 1.19.87 2.35.99 2.51.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.38.51.58.19 1.11.16 1.53.1.47-.07 1.45-.59 1.65-1.16.2-.57.2-1.06.14-1.16-.06-.11-.22-.17-.47-.29z" fill="white"/>
+</svg>
+</a>
+</div>
+
+<!-- SCRIPTS -->
+<script>
+// ---- Formulário -> WhatsApp ----
+document.getElementById("orcamentoForm").addEventListener("submit", function(e){
+e.preventDefault();
+let nome = document.getElementById("nome").value;
+let empresa = document.getElementById("empresa").value;
+let telefone = document.getElementById("telefone").value;
+let email = document.getElementById("email").value;
+let servico = document.getElementById("servico").value;
+let mensagem = document.getElementById("mensagem").value;
+
+let texto = "Olá ALVINTECH! Gostaria de solicitar um orçamento.%0A%0A"
++ "Nome: " + encodeURIComponent(nome)
++ "%0AEmpresa/Condomínio: " + encodeURIComponent(empresa)
++ "%0AWhatsApp: " + encodeURIComponent(telefone)
++ "%0AE-mail: " + encodeURIComponent(email)
++ "%0ASolução: " + encodeURIComponent(servico)
++ "%0ADetalhes: " + encodeURIComponent(mensagem);
+
+window.open("https://wa.me/5543988460629?text=" + texto, "_blank");
+});
+
+// ---- Slider facial (10 imagens) ----
+let currentSlide = 0;
+const slides = document.querySelectorAll('.facial-slide');
+function nextSlide(){
+if(!slides.length) return;
+slides[currentSlide].classList.remove('active');
+currentSlide = (currentSlide + 1) % slides.length;
+slides[currentSlide].classList.add('active');
+}
+setInterval(nextSlide, 3200);
+
+// ---- Menu mobile ----
+const burgerBtn = document.getElementById('burgerBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+burgerBtn.addEventListener('click', function(){
+const isOpen = mobileMenu.classList.toggle('open');
+burgerBtn.setAttribute('aria-expanded', isOpen);
+burgerBtn.textContent = isOpen ? '✕' : '☰';
+});
+mobileMenu.querySelectorAll('a').forEach(function(link){
+link.addEventListener('click', function(){
+mobileMenu.classList.remove('open');
+burgerBtn.setAttribute('aria-expanded', 'false');
+burgerBtn.textContent = '☰';
+});
+});
+
+// ---- Relógio ao vivo no painel do scanner ----
+function tickClock(){
+const now = new Date();
+const hh = String(now.getHours()).padStart(2,'0');
+const mm = String(now.getMinutes()).padStart(2,'0');
+const ss = String(now.getSeconds()).padStart(2,'0');
+const y = now.getFullYear(), m = String(now.getMonth()+1).padStart(2,'0'), d = String(now.getDate()).padStart(2,'0');
+const clockEl = document.getElementById('liveClock');
+const dateEl = document.getElementById('liveDate');
+if(clockEl) clockEl.textContent = hh+":"+mm+":"+ss;
+if(dateEl) dateEl.textContent = y+"/"+m+"/"+d;
+}
+tickClock();
+setInterval(tickClock, 1000);
+
+// ---- Ciclo de "reconhecimento facial" do painel hero ----
+const scannerScreen = document.getElementById('scannerScreen');
+const statusText = document.getElementById('scanStatusText');
+function scanCycle(){
+if(!scannerScreen) return;
+statusText.textContent = "ANALISANDO ACESSO";
+scannerScreen.classList.remove('granted');
+setTimeout(function(){
+scannerScreen.classList.add('granted');
+statusText.textContent = "ACESSO LIBERADO";
+}, 2600);
+}
+scanCycle();
+setInterval(scanCycle, 5200);
+
+// ---- Reveal on scroll ----
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver(function(entries){
+entries.forEach(function(entry){
+if(entry.isIntersecting){
+entry.target.classList.add('visible');
+io.unobserve(entry.target);
+}
+});
+}, {threshold:.15});
+revealEls.forEach(function(el){ io.observe(el); });
+
+// ---- Contadores animados ----
+const counters = document.querySelectorAll('[data-count]');
+function animateCounter(el){
+const target = parseFloat(el.getAttribute('data-count'));
+const suffix = el.getAttribute('data-suffix') || '';
+const dur = 1400;
+const start = performance.now();
+function step(now){
+const p = Math.min((now - start) / dur, 1);
+const eased = 1 - Math.pow(1 - p, 3);
+const val = eased * target;
+el.textContent = (target % 1 === 0 ? Math.round(val) : val.toFixed(1)) + suffix;
+if(p < 1) requestAnimationFrame(step);
+}
+requestAnimationFrame(step);
+}
+const cio = new IntersectionObserver(function(entries){
+entries.forEach(function(entry){
+if(entry.isIntersecting){
+animateCounter(entry.target);
+cio.unobserve(entry.target);
+}
+});
+}, {threshold:.4});
+counters.forEach(function(el){ cio.observe(el); });
+
+// ---- Barra de progresso de leitura ----
+const progressBar = document.getElementById('progressBar');
+const siteHeader = document.getElementById('siteHeader');
+function updateProgress(){
+const h = document.documentElement;
+const scrolled = h.scrollTop;
+const height = h.scrollHeight - h.clientHeight;
+const pct = height > 0 ? (scrolled / height) * 100 : 0;
+if(progressBar) progressBar.style.width = pct + '%';
+if(siteHeader) siteHeader.classList.toggle('scrolled', scrolled > 30);
+}
+window.addEventListener('scroll', updateProgress, {passive:true});
+updateProgress();
+
+// ---- Brilho que segue o cursor nos cards ----
+const glowEls = document.querySelectorAll('.card, .service, .testi-card, .offer, .gal-pair');
+glowEls.forEach(function(el){
+el.addEventListener('mousemove', function(e){
+const rect = el.getBoundingClientRect();
+el.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
+el.style.setProperty('--my', (e.clientY - rect.top) + 'px');
+});
+});
+
+// ---- Parallax sutil no hero (fundo de circuito + scanner) ----
+(function(){
+const heroSec = document.getElementById('inicio');
+const circuit = heroSec ? heroSec.querySelector('.circuit-bg') : null;
+const scannerWrap = heroSec ? heroSec.querySelector('.scanner-wrap > div') : null;
+if(!heroSec || window.innerWidth < 960) return;
+heroSec.addEventListener('mousemove', function(e){
+const rect = heroSec.getBoundingClientRect();
+const px = (e.clientX - rect.left) / rect.width - 0.5;
+const py = (e.clientY - rect.top) / rect.height - 0.5;
+if(circuit) circuit.style.transform = 'translate(' + (px * 14) + 'px,' + (py * 10) + 'px)';
+if(scannerWrap) scannerWrap.style.transform = 'translate(' + (px * -10) + 'px,' + (py * -8) + 'px)';
+});
+heroSec.addEventListener('mouseleave', function(){
+if(circuit) circuit.style.transform = '';
+if(scannerWrap) scannerWrap.style.transform = '';
+});
+})();
+
+// ---- Radar: sincroniza o brilho de cada ponto com a passagem do feixe ----
+(function(){
+const radarBox = document.querySelector('.radar-box');
+const radarPoints = document.querySelectorAll('.radar-point');
+if(!radarBox || !radarPoints.length) return;
+const sweepDuration = 4.5;
+function syncBlips(){
+const boxRect = radarBox.getBoundingClientRect();
+const cx = boxRect.left + boxRect.width / 2;
+const cy = boxRect.top + boxRect.height / 2;
+radarPoints.forEach(function(p){
+const r = p.getBoundingClientRect();
+const px = r.left + r.width / 2;
+const py = r.top + r.height / 2;
+let angle = Math.atan2(px - cx, -(py - cy)) * 180 / Math.PI;
+if(angle < 0) angle += 360;
+const fraction = angle / 360;
+const delay = (fraction - 0.5) * sweepDuration;
+p.style.setProperty('--blipDelay', delay + 's');
+});
+}
+syncBlips();
+window.addEventListener('resize', syncBlips);
+})();
+
+// ---- Calculadora de câmeras ----
+function calcularCameras(){
+const tipo = document.getElementById('calcTipo').value;
+const ambientes = Math.max(1, parseInt(document.getElementById('calcAmbientes').value, 10) || 1);
+const portao = document.getElementById('calcPortao').value;
+
+let fatorTipo = tipo === 'comercial' ? 1.2 : (tipo === 'condominio' ? 1.5 : 1);
+let cameras = Math.round(ambientes * fatorTipo) + (portao === 'sim' ? 1 : 0);
+cameras = Math.max(cameras, 2);
+let pontosAcesso = ambientes > 4 ? 2 : 1;
+if(tipo === 'condominio') pontosAcesso += 1;
+
+const nomesTipo = {residencial:'Residência', comercial:'Comércio / Empresa', condominio:'Condomínio'};
+
+const resultEl = document.getElementById('calcResultBody') || document.getElementById('calcResult');
+resultEl.innerHTML =
+'<div class="tag">ESTIMATIVA PARA '+ nomesTipo[tipo].toUpperCase() +'</div>'+
+'<div class="calc-metric"><strong data-count="'+cameras+'">0</strong><span>câmeras recomendadas</span></div>'+
+'<div class="calc-metric"><strong data-count="'+pontosAcesso+'">0</strong><span>ponto(s) de controle de acesso</span></div>'+
+'<div class="calc-note">Estimativa inicial gratuita. Nossa equipe confirma o projeto ideal com uma visita técnica, sem custo.</div>'+
+'<a href="#orcamento" class="btn primary" style="margin-top:16px;justify-content:center;" onclick="prepararOrcamento(\''+nomesTipo[tipo]+'\','+cameras+','+pontosAcesso+')">USAR NO ORÇAMENTO →</a>';
+resultEl.querySelectorAll('[data-count]').forEach(function(el){ animateCounter(el); });
+}
+
+function typeIntoField(el, texto, velocidade){
+if(!el) return;
+velocidade = velocidade || 16;
+if(el._typeTimer) clearInterval(el._typeTimer);
+el.value = '';
+let i = 0;
+el._typeTimer = setInterval(function(){
+el.value = texto.slice(0, i);
+i++;
+if(i > texto.length){ clearInterval(el._typeTimer); el._typeTimer = null; }
+}, velocidade);
+}
+
+function prepararOrcamento(tipoLocal, cameras, pontos){
+const msg = document.getElementById('mensagem');
+typeIntoField(msg, 'Fiz a estimativa no site: ' + tipoLocal + ', aproximadamente ' + cameras + ' câmeras e ' + pontos + ' ponto(s) de acesso. Gostaria de um orçamento detalhado.');
+}
+
+// ---- Planos -> preencher orçamento ----
+function selecionarPlano(nome){
+const msg = document.getElementById('mensagem');
+typeIntoField(msg, 'Tenho interesse no plano ' + nome + '. Podem me passar um orçamento?');
+window.location.hash = 'orcamento';
+}
+
+// ---- Bolha de chat do WhatsApp (efeito digitando) ----
+(function(){
+const teaser = document.getElementById('chatTeaser');
+const teaserText = document.getElementById('teaserText');
+if(!teaser || !teaserText || window.innerWidth < 960) return;
+const frase = 'Olá! Vi o site da ALVINTECH e quero um orçamento 👋';
+let i = 0;
+function mostrarTeaser(){
+teaser.classList.add('show');
+const typeInterval = setInterval(function(){
+teaserText.textContent = frase.slice(0, i);
+i++;
+if(i > frase.length) clearInterval(typeInterval);
+}, 45);
+}
+setTimeout(mostrarTeaser, 4000);
+})();
+function fecharTeaser(){
+document.getElementById('chatTeaser').classList.remove('show');
+}
+
+// ---- Download + Upload animado (somente Redes) ----
+(function(){
+  const dl = document.getElementById('dlSpeed');
+  const up = document.getElementById('upSpeed');
+  if(!dl) return;
+  function tick(){
+    dl.textContent = 720 + Math.floor(Math.random() * 280);
+    if(up) up.textContent = 180 + Math.floor(Math.random() * 220);
+  }
+  setInterval(tick, 900);
+})();
+
+// ---- Celular: registros de entrada/saída ----
+(function(){
+  const box = document.getElementById('phoneLogs');
+  const timeEl = document.getElementById('phoneTime');
+  if(!box) return;
+
+  const pessoas = [
+    {nome:'Ana Souza', ini:'AS', local:'Portão Social'},
+    {nome:'Carlos Lima', ini:'CL', local:'Garagem A'},
+    {nome:'Mariana R.', ini:'MR', local:'Portaria'},
+    {nome:'João Pedro', ini:'JP', local:'Portão Social'},
+    {nome:'Fernanda K.', ini:'FK', local:'Garagem B'},
+    {nome:'Roberto M.', ini:'RM', local:'Portaria'},
+    {nome:'Juliana C.', ini:'JC', local:'Portão Social'},
+    {nome:'Visitante QR', ini:'VQ', local:'Visitantes'},
+    {nome:'Lucas T.', ini:'LT', local:'Garagem A'},
+    {nome:'Patricia N.', ini:'PN', local:'Portaria'}
+  ];
+
+  function agora(){
+    const n = new Date();
+    const p = function(v){ return String(v).padStart(2,'0'); };
+    return p(n.getHours())+':'+p(n.getMinutes())+':'+p(n.getSeconds());
+  }
+  function tickPhoneClock(){
+    if(!timeEl) return;
+    const n = new Date();
+    timeEl.textContent = String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0');
+  }
+  tickPhoneClock();
+  setInterval(tickPhoneClock, 15000);
+
+  function addLog(){
+    const p = pessoas[Math.floor(Math.random()*pessoas.length)];
+    const tipo = Math.random() > 0.45 ? 'in' : 'out';
+    const row = document.createElement('div');
+    row.className = 'phone-log';
+    row.innerHTML =
+      '<div class="avatar">'+p.ini+'</div>'+
+      '<div class="info"><div class="name">'+p.nome+'</div>'+
+      '<div class="meta">'+p.local+' · '+agora()+'</div></div>'+
+      '<span class="badge '+tipo+'">'+(tipo==='in'?'ENTRADA':'SAÍDA')+'</span>';
+    box.insertBefore(row, box.firstChild);
+    while(box.children.length > 5) box.removeChild(box.lastChild);
+  }
+
+  // logs iniciais
+  for(let i=0;i<4;i++) addLog();
+  setInterval(addLog, 2800);
+})();
+</script>
+
+</body>
+</html>
